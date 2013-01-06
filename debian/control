@@ -1,0 +1,33 @@
+Source: qtkeychain
+Priority: extra
+Maintainer: ownCloud for Debian maintainers <pkg-owncloud-maintainers@lists.alioth.debian.org>
+Uploaders: Thomas Mueller <thomas.mueller@tmit.eu>, Paul van Tilburg <paulvt@debian.org>
+Build-Depends: debhelper (>= 8.0.0), cmake, libqt4-dev (>= 4.7)
+Standards-Version: 3.9.3
+Section: libs
+Homepage: https://github.com/frankosterfeld/qtkeychain
+Vcs-Git: git://git.debian.org/collab-maint/qtkeychain.git
+Vcs-Browser: http://git.debian.org/?p=collab-maint/qtkeychain.git;a=summary
+
+Package: libqtkeychain0
+Architecture: any
+Multi-Arch: same
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Pre-Depends: ${misc:Pre-Depends}
+Description: Developement files for qtkeychain
+ A Qt API to store passwords and other secret data securely
+ .
+ It uses KWallet (via D-Bus) if available.
+ Support for the GNOME Keyring via freedesktop.org's Secret Storage
+ D-Bus specification is planned but not yet implemented.
+
+Package: qtkeychain-dev
+Section: libdevel
+Architecture: any
+Multi-Arch: same
+Depends: libqtkeychain0 (= ${binary:Version}), ${misc:Depends}
+Description: Qt API to store passwords and other secret data securely
+ It uses KWallet (via D-Bus) if available.
+ Support for the GNOME Keyring via freedesktop.org's Secret Storage
+ D-Bus specification is planned but not yet implemented.
+

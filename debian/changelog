@@ -1,0 +1,5 @@
+qtkeychain (0.1.0-0r1) UNRELEASED; urgency=low
+
+  * Initial release (Closes: #nnnn)  <nnnn is the bug number of your ITP>
+
+ -- Sandro Knauß <bugs@sandroknauss.de>  Sun, 06 Jan 2013 13:10:17 +0100
