@@ -13,7 +13,3 @@ export DEB_CXXFLAGS_MAINT_APPEND = -fvisibility=hidden -fvisibility-inlines-hidd
 
 override_dh_install:
 	dh_install --list-missing
-
-override_dh_makeshlibs:
-	dh_makeshlibs -- -c0
-
