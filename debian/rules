@@ -5,10 +5,15 @@
 #export DH_VERBOSE=1
 
 export DEB_BUILD_HARDENING=1
+export DEB_CXXFLAGS_MAINT_APPEND = -fvisibility=hidden -fvisibility-inlines-hidden
 
 %:
-	dh $@ --with kde
+	dh $@ --parallel --with pkgkde_symbolshelper
 
 
 override_dh_install:
 	dh_install --list-missing
+
+override_dh_makeshlibs:
+	dh_makeshlibs -- -c0
+
