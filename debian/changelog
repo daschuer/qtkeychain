@@ -1,5 +1,5 @@
-qtkeychain (0.1.0-1) UNRELEASED; urgency=low
+qtkeychain (0.1.0-1) unstable; urgency=low
 
   * Initial release (Closes: #699687)
 
- -- Sandro Knauß <bugs@sandroknauss.de>  Sun, 06 Jan 2013 13:10:17 +0100
+ -- Sandro Knauß <bugs@sandroknauss.de>  Mon, 13 May 2013 01:39:05 +0200
