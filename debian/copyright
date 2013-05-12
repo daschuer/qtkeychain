@@ -2,12 +2,12 @@ Format: http://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
 Upstream-Name: qtkeychain
 Source: https://github.com/frankosterfeld/qtkeychain
 
-Files: debian/*
-Copyright: 2013 Sandro Knauß <bugs@sandroknauss.de>
-License: BSD-2-clause
-
 Files: *
 Copyright: 2011 Frank Osterfeld <frank.osterfeld@gmail.com>
+License: BSD-2-clause
+
+Files: debian/*
+Copyright: 2013 Sandro Knauß <bugs@sandroknauss.de>
 License: BSD-2-clause
 
 License: BSD-2-clause
