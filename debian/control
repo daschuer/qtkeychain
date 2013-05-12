@@ -24,7 +24,7 @@ Section: libdevel
 Architecture: any
 Multi-Arch: same
 Depends: libqtkeychain0 (= ${binary:Version}), ${misc:Depends}
-Description: Developement files for qtkeychain
+Description: Development files for qtkeychain
  A Qt API to store passwords and other secret data securely
  .
  It uses KWallet (via D-Bus) if available.
