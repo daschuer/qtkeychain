@@ -3,4 +3,4 @@
 # See uscan(1) for format
 version=3
 
-https://github.com/frankosterfeld/qtkeychain/tags /frankosterfeld/qtkeychain/archive/v(.*)\.tar\.gz
+http://githubredir.debian.net/github/frankosterfeld/qtkeychain/ v(.*).tar.gz
