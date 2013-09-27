@@ -1,6 +1,15 @@
+Description: FTBFS on !linux: libraries left in /usr/lib
+ Remove cmake/Modules/GNUInstallDirs.cmake to use the shipped version from debian.
+Author: Sandro Knauß <bugs@sandroknauss.de>
+Origin: debian
+Bug-Debian: http://bugs.debian.org/cgi-bin/bugreport.cgi?bug=710340
+Forwarded: https://github.com/frankosterfeld/qtkeychain/issues/20
+Last-Update: 2013-09-27
+---
+This patch header follows DEP-3: http://dep.debian.net/deps/dep3/
 Index: qtkeychain/cmake/Modules/GNUInstallDirs.cmake
 ===================================================================
---- qtkeychain.orig/cmake/Modules/GNUInstallDirs.cmake	2013-01-31 02:33:09.128734322 +0100
+--- qtkeychain.orig/cmake/Modules/GNUInstallDirs.cmake	2013-09-27 14:21:48.499137669 +0200
 +++ /dev/null	1970-01-01 00:00:00.000000000 +0000
 @@ -1,188 +0,0 @@
 -# - Define GNU standard installation directories
