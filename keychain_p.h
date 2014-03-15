@@ -1,5 +1,5 @@
 /******************************************************************************
- *   Copyright (C) 2011 Frank Osterfeld <frank.osterfeld@gmail.com>           *
+ *   Copyright (C) 2011-2014 Frank Osterfeld <frank.osterfeld@gmail.com>      *
  *                                                                            *
  * This program is distributed in the hope that it will be useful, but        *
  * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY *
@@ -15,7 +15,7 @@
 #include <QSettings>
 #include <QVector>
 
-#if defined(Q_OS_UNIX) && !defined(Q_WS_MAC)
+#if defined(Q_OS_UNIX) && !defined(Q_OS_DARWIN)
 
 #include <QDBusPendingCallWatcher>
 
@@ -65,16 +65,20 @@ public:
     };
     DataType dataType;
 
-#if defined(Q_OS_UNIX) && !defined(Q_WS_MAC)
+#if defined(Q_OS_UNIX) && !defined(Q_OS_DARWIN)
     org::kde::KWallet* iface;
+    static void gnomeKeyring_cb( int result, const char* string, ReadPasswordJobPrivate* data );
     friend class QKeychain::JobExecutor;
+    void fallbackOnError(const QDBusError& err);
 
 private Q_SLOTS:
+    void kwalletWalletFound( QDBusPendingCallWatcher* watcher );
     void kwalletOpenFinished( QDBusPendingCallWatcher* watcher );
     void kwalletEntryTypeFinished( QDBusPendingCallWatcher* watcher );
     void kwalletReadFinished( QDBusPendingCallWatcher* watcher );
 #else //moc's too dumb to respect above macros, so just define empty slot implementations
 private Q_SLOTS:
+    void kwalletWalletFound( QDBusPendingCallWatcher* ) {}
     void kwalletOpenFinished( QDBusPendingCallWatcher* ) {}
     void kwalletEntryTypeFinished( QDBusPendingCallWatcher* ) {}
     void kwalletReadFinished( QDBusPendingCallWatcher* ) {}
@@ -93,16 +97,21 @@ public:
         Text,
         Binary
     };
+
+    static QString modeToString(Mode m);
+    static Mode stringToMode(const QString& s);
+
     WritePasswordJob* const q;
     Mode mode;
     QString key;
     QByteArray binaryData;
     QString textData;
 
-#if defined(Q_OS_UNIX) && !defined(Q_WS_MAC)
+#if defined(Q_OS_UNIX) && !defined(Q_OS_DARWIN)
     org::kde::KWallet* iface;
+    static void gnomeKeyring_cb( int result, WritePasswordJobPrivate* self );
     friend class QKeychain::JobExecutor;
-
+    void fallbackOnError(const QDBusError& err);
 
 private Q_SLOTS:
     void kwalletOpenFinished( QDBusPendingCallWatcher* watcher );
