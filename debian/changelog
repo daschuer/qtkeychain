@@ -1,6 +1,9 @@
-qtkeychain (0.3.0-1) UNRELEASED; urgency=medium
+qtkeychain (0.3.0-1) unstable; urgency=medium
 
-  * New upstream release.
+  * New upstream release. (Closes: #735043)
+  * Updated debian/libqtkeychain0.symbols
+  * Updated debian/copyright
+  * Bumped Standards-Version
 
  -- Sandro Knauß <bugs@sandroknauss.de>  Sat, 15 Mar 2014 20:23:34 +0100
 
