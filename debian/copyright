@@ -3,7 +3,7 @@ Upstream-Name: qtkeychain
 Source: https://github.com/frankosterfeld/qtkeychain
 
 Files: *
-Copyright: 2011 Frank Osterfeld <frank.osterfeld@gmail.com>
+Copyright: 2011-2014 Frank Osterfeld <frank.osterfeld@gmail.com>
 License: BSD-2-clause
 
 Files: debian/*
