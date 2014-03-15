@@ -1,4 +1,4 @@
-# SymbolsHelper-Confirmed: 0.1.0 amd64 i386
+# SymbolsHelper-Confirmed: 0.3.0 amd64
 libqtkeychain.so.0 libqtkeychain0 #MINVER#
  (optional=templinst)_Z10qdbus_castI10QByteArrayET_RK13QDBusArgumentPS1_@Base 0.1.0
  (optional=templinst)_Z10qdbus_castI10QByteArrayET_RK8QVariantPS1_@Base 0.1.0
@@ -35,6 +35,7 @@ libqtkeychain.so.0 libqtkeychain0 #MINVER#
  (optional=templinst)_Z4qMinIiERKT_S2_S2_@Base 0.1.0
  (optional=templinst)_Z5qCopyIP8QPointerIN9QKeychain3JobEES4_ET0_T_S6_S5_@Base 0.1.0
  _Z7qt_noopv@Base 0.1.0
+ (optional=templinst)_Z9qMakePairIN9QKeychain5ErrorE7QStringE5QPairIT_T0_ERKS4_RKS5_@Base 0.3.0
  _ZN10QByteArrayC1ERKS_@Base 0.1.0
  _ZN10QByteArrayC1Ev@Base 0.1.0
  _ZN10QByteArrayC2ERKS_@Base 0.1.0
@@ -47,6 +48,17 @@ libqtkeychain.so.0 libqtkeychain0 #MINVER#
  _ZN11QLatin1CharC2Ec@Base 0.1.0
  _ZN11QMetaObject12invokeMethodEP7QObjectPKcN2Qt14ConnectionTypeE16QGenericArgumentS6_S6_S6_S6_S6_S6_S6_S6_S6_@Base 0.1.0
  (optional=templinst)_ZN11QMetaTypeIdI13QDBusArgumentE14qt_metatype_idEv@Base 0.1.0
+ _ZN12GnomeKeyring11isSupportedEv@Base 0.3.0
+ _ZN12GnomeKeyring21GNOME_KEYRING_DEFAULTE@Base 0.3.0
+ _ZN12GnomeKeyring21find_network_passwordEPKcS1_PFvNS_6ResultES1_PvES3_PFvS3_E@Base 0.3.0
+ _ZN12GnomeKeyring22store_network_passwordEPKcS1_S1_S1_S1_PFvNS_6ResultEPvES3_PFvS3_E@Base 0.3.0
+ _ZN12GnomeKeyring23delete_network_passwordEPKcS1_PFvNS_6ResultEPvES3_PFvS3_E@Base 0.3.0
+ _ZN12GnomeKeyring8instanceEv@Base 0.3.0
+ _ZN12GnomeKeyringC1Ev@Base 0.3.0
+ _ZN12GnomeKeyringC2Ev@Base 0.3.0
+ _ZN12GnomeKeyringD0Ev@Base 0.3.0
+ _ZN12GnomeKeyringD1Ev@Base 0.3.0
+ _ZN12GnomeKeyringD2Ev@Base 0.3.0
  (optional=templinst)_ZN12QMetaTypeId2I10QByteArrayE14qt_metatype_idEv@Base 0.1.0
  (optional=templinst)_ZN12QMetaTypeId2I11QStringListE14qt_metatype_idEv@Base 0.1.0
  (optional=templinst)_ZN12QMetaTypeId2I13QDBusArgumentE14qt_metatype_idEv@Base 0.1.0
@@ -57,6 +69,10 @@ libqtkeychain.so.0 libqtkeychain0 #MINVER#
  (optional=templinst)_ZN12QMetaTypeId2IxE14qt_metatype_idEv@Base 0.1.0
  _ZN13QLatin1StringC1EPKc@Base 0.1.0
  _ZN13QLatin1StringC2EPKc@Base 0.1.0
+ (optional=templinst)_ZN14QScopedPointerI9QSettings21QScopedPointerDeleterIS0_EEC1EPS0_@Base 0.3.0
+ (optional=templinst)_ZN14QScopedPointerI9QSettings21QScopedPointerDeleterIS0_EEC2EPS0_@Base 0.3.0
+ (optional=templinst)_ZN14QScopedPointerI9QSettings21QScopedPointerDeleterIS0_EED1Ev@Base 0.3.0
+ (optional=templinst)_ZN14QScopedPointerI9QSettings21QScopedPointerDeleterIS0_EED2Ev@Base 0.3.0
  _ZN15QBasicAtomicInt3refEv@Base 0.1.0
  _ZN15QBasicAtomicInt5derefEv@Base 0.1.0
  _ZN15QBasicAtomicIntaSEi@Base 0.1.0
@@ -121,6 +137,7 @@ libqtkeychain.so.0 libqtkeychain0 #MINVER#
  (optional=templinst)_ZN17QDBusPendingReplyIvvvvvvvvED2Ev@Base 0.1.0
  (optional=templinst)_ZN17QDBusPendingReplyIvvvvvvvvEaSERK16QDBusPendingCall@Base 0.1.0
  (optional=templinst)_ZN17QDBusPendingReplyIvvvvvvvvEaSERKS0_@Base 0.1.0
+ (optional=templinst)_ZN21QScopedPointerDeleterI9QSettingsE7cleanupEPS0_@Base 0.3.0
  _ZN22OrgKdeKWalletInterface10folderListEiRK7QString@Base 0.1.0
  _ZN22OrgKdeKWalletInterface10writeEntryEiRK7QStringS2_RK10QByteArrayS2_@Base 0.1.0
  _ZN22OrgKdeKWalletInterface10writeEntryEiRK7QStringS2_RK10QByteArrayiS2_@Base 0.1.0
@@ -210,7 +227,12 @@ libqtkeychain.so.0 libqtkeychain0 #MINVER#
  (optional=templinst)_ZN5QListI8QVariantED1Ev@Base 0.1.0
  (optional=templinst)_ZN5QListI8QVariantED2Ev@Base 0.1.0
  (optional=templinst)_ZN5QListI8QVariantElsERKS0_@Base 0.1.0
+ (optional=templinst)_ZN5QPairIN9QKeychain5ErrorE7QStringEC1ERKS1_RKS2_@Base 0.3.0
+ (optional=templinst)_ZN5QPairIN9QKeychain5ErrorE7QStringEC2ERKS1_RKS2_@Base 0.3.0
+ (optional=templinst)_ZN5QPairIN9QKeychain5ErrorE7QStringED1Ev@Base 0.3.0
+ (optional=templinst)_ZN5QPairIN9QKeychain5ErrorE7QStringED2Ev@Base 0.3.0
  _ZN7QObject10disconnectEPKS_PKc@Base 0.1.0
+ _ZN7QObject2trEPKcS1_@Base 0.3.0
  _ZN7QStringC1EPKc@Base 0.1.0
  _ZN7QStringC1ERK13QLatin1String@Base 0.1.0
  _ZN7QStringC1ERKS_@Base 0.1.0
@@ -317,7 +339,10 @@ libqtkeychain.so.0 libqtkeychain0 #MINVER#
  _ZN9QKeychain22ReadPasswordJobPrivate11qt_metacallEN11QMetaObject4CallEiPPv@Base 0.1.0
  _ZN9QKeychain22ReadPasswordJobPrivate11qt_metacastEPKc@Base 0.1.0
  _ZN9QKeychain22ReadPasswordJobPrivate14scheduledStartEv@Base 0.1.0
+ _ZN9QKeychain22ReadPasswordJobPrivate15fallbackOnErrorERK10QDBusError@Base 0.3.0
+ _ZN9QKeychain22ReadPasswordJobPrivate15gnomeKeyring_cbEiPKcPS0_@Base 0.3.0
  _ZN9QKeychain22ReadPasswordJobPrivate16staticMetaObjectE@Base 0.1.0
+ _ZN9QKeychain22ReadPasswordJobPrivate18kwalletWalletFoundEP23QDBusPendingCallWatcher@Base 0.3.0
  _ZN9QKeychain22ReadPasswordJobPrivate19kwalletOpenFinishedEP23QDBusPendingCallWatcher@Base 0.1.0
  _ZN9QKeychain22ReadPasswordJobPrivate19kwalletReadFinishedEP23QDBusPendingCallWatcher@Base 0.1.0
  _ZN9QKeychain22ReadPasswordJobPrivate24kwalletEntryTypeFinishedEP23QDBusPendingCallWatcher@Base 0.1.0
@@ -329,7 +354,11 @@ libqtkeychain.so.0 libqtkeychain0 #MINVER#
  _ZN9QKeychain22ReadPasswordJobPrivateD2Ev@Base 0.1.0
  _ZN9QKeychain23WritePasswordJobPrivate11qt_metacallEN11QMetaObject4CallEiPPv@Base 0.1.0
  _ZN9QKeychain23WritePasswordJobPrivate11qt_metacastEPKc@Base 0.1.0
+ _ZN9QKeychain23WritePasswordJobPrivate12modeToStringENS0_4ModeE@Base 0.3.0
+ _ZN9QKeychain23WritePasswordJobPrivate12stringToModeERK7QString@Base 0.3.0
  _ZN9QKeychain23WritePasswordJobPrivate14scheduledStartEv@Base 0.1.0
+ _ZN9QKeychain23WritePasswordJobPrivate15fallbackOnErrorERK10QDBusError@Base 0.3.0
+ _ZN9QKeychain23WritePasswordJobPrivate15gnomeKeyring_cbEiPS0_@Base 0.3.0
  _ZN9QKeychain23WritePasswordJobPrivate16staticMetaObjectE@Base 0.1.0
  _ZN9QKeychain23WritePasswordJobPrivate19kwalletOpenFinishedEP23QDBusPendingCallWatcher@Base 0.1.0
  _ZN9QKeychain23WritePasswordJobPrivate20kwalletWriteFinishedEP23QDBusPendingCallWatcher@Base 0.1.0
@@ -367,10 +396,12 @@ libqtkeychain.so.0 libqtkeychain0 #MINVER#
  _ZN9QKeychain3JobD2Ev@Base 0.1.0
  (optional=templinst)_ZN9QtPrivate17QMetaTypeIdHelperI13QDBusArgumentLb1EE14qt_metatype_idEv@Base 0.1.0
  _ZNK10QByteArray7isEmptyEv@Base 0.1.0
+ _ZNK10QByteArray9constDataEv@Base 0.3.0
  _ZNK10QByteArraycvPKcEv@Base 0.1.0
  _ZNK11QLatin1Char7unicodeEv@Base 0.1.0
  _ZNK13QLatin1String6latin1Ev@Base 0.1.0
  (optional=templinst)_ZNK14QScopedPointerI11QObjectData21QScopedPointerDeleterIS0_EEptEv@Base 0.1.0
+ (optional=templinst)_ZNK14QScopedPointerI9QSettings21QScopedPointerDeleterIS0_EE4dataEv@Base 0.3.0
  _ZNK15QBasicAtomicIntcviEv@Base 0.1.0
  _ZNK15QBasicAtomicInteqEi@Base 0.1.0
  _ZNK15QBasicAtomicIntneEi@Base 0.1.0
@@ -387,6 +418,7 @@ libqtkeychain.so.0 libqtkeychain0 #MINVER#
  _ZNK22OrgKdeKWalletInterface10metaObjectEv@Base 0.1.0
  (optional=templinst)_ZNK28QExplicitlySharedDataPointerI23QDBusPendingCallPrivateEntEv@Base 0.1.0
  _ZNK7QString3argERKS_S1_@Base 0.1.0
+ _ZNK7QString3argEiiiRK5QChar@Base 0.3.0
  _ZNK7QString7isEmptyEv@Base 0.1.0
  (optional=templinst)_ZNK7QVectorI8QPointerIN9QKeychain3JobEEE16alignOfTypedDataEv@Base 0.1.0
  (optional=templinst)_ZNK7QVectorI8QPointerIN9QKeychain3JobEEE7isEmptyEv@Base 0.1.0
@@ -416,11 +448,7 @@ libqtkeychain.so.0 libqtkeychain0 #MINVER#
  _ZNK9QKeychain3Job8settingsEv@Base 0.1.0
  _ZNK9QListData3endEv@Base 0.1.0
  _ZNK9QListData5beginEv@Base 0.1.0
- (optional=templinst)_ZNKSt8auto_ptrI9QSettingsE3getEv@Base 0.1.0
- (optional=templinst)_ZNSt8auto_ptrI9QSettingsEC1EPS0_@Base 0.1.0
- (optional=templinst)_ZNSt8auto_ptrI9QSettingsEC2EPS0_@Base 0.1.0
- (optional=templinst)_ZNSt8auto_ptrI9QSettingsED1Ev@Base 0.1.0
- (optional=templinst)_ZNSt8auto_ptrI9QSettingsED2Ev@Base 0.1.0
+ _ZTI12GnomeKeyring@Base 0.3.0
  _ZTI22OrgKdeKWalletInterface@Base 0.1.0
  _ZTIN9QKeychain10JobPrivateE@Base 0.1.0
  _ZTIN9QKeychain11JobExecutorE@Base 0.1.0
@@ -431,6 +459,7 @@ libqtkeychain.so.0 libqtkeychain0 #MINVER#
  _ZTIN9QKeychain23WritePasswordJobPrivateE@Base 0.1.0
  _ZTIN9QKeychain24DeletePasswordJobPrivateE@Base 0.1.0
  _ZTIN9QKeychain3JobE@Base 0.1.0
+ _ZTS12GnomeKeyring@Base 0.3.0
  _ZTS22OrgKdeKWalletInterface@Base 0.1.0
  _ZTSN9QKeychain10JobPrivateE@Base 0.1.0
  _ZTSN9QKeychain11JobExecutorE@Base 0.1.0
@@ -441,6 +470,7 @@ libqtkeychain.so.0 libqtkeychain0 #MINVER#
  _ZTSN9QKeychain23WritePasswordJobPrivateE@Base 0.1.0
  _ZTSN9QKeychain24DeletePasswordJobPrivateE@Base 0.1.0
  _ZTSN9QKeychain3JobE@Base 0.1.0
+ _ZTV12GnomeKeyring@Base 0.3.0
  _ZTV22OrgKdeKWalletInterface@Base 0.1.0
  _ZTVN9QKeychain10JobPrivateE@Base 0.1.0
  _ZTVN9QKeychain11JobExecutorE@Base 0.1.0
