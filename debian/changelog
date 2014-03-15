@@ -1,3 +1,9 @@
+qtkeychain (0.3.0-1) UNRELEASED; urgency=medium
+
+  * New upstream release.
+
+ -- Sandro Knauß <bugs@sandroknauss.de>  Sat, 15 Mar 2014 20:23:34 +0100
+
 qtkeychain (0.1.0-2) unstable; urgency=low
 
   * FTBFS on !linux: libraries left in /usr/lib (Closes: #710340)
