@@ -19,6 +19,7 @@ Architecture: any
 Multi-Arch: same
 Depends: ${misc:Depends}, ${shlibs:Depends}
 Pre-Depends: ${misc:Pre-Depends}
+Recommends: gnome-keyring | kwalletmanager
 Description: Qt API to store passwords and other secret data securely
  It uses KWallet (via D-Bus) if available.
  Support for the GNOME Keyring via freedesktop.org's Secret Storage
