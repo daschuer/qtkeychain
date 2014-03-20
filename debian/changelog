@@ -1,11 +1,12 @@
 qtkeychain (0.3.0-1) unstable; urgency=medium
 
   * New upstream release. (Closes: #735043)
+  * Added gnome-keyring|kwalletmanager as recommends
   * Updated debian/libqtkeychain0.symbols
   * Updated debian/copyright
   * Bumped Standards-Version
 
- -- Sandro Knauß <bugs@sandroknauss.de>  Sat, 15 Mar 2014 20:23:34 +0100
+ -- Sandro Knauß <bugs@sandroknauss.de>  Thu, 20 Mar 2014 13:09:16 +0100
 
 qtkeychain (0.1.0-2) unstable; urgency=low
 
