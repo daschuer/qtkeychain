@@ -3,13 +3,13 @@
 
 # Uncomment this to turn on verbose mode.
 #export DH_VERBOSE=1
+export QT_SELECT := qt4
 
 export DEB_BUILD_HARDENING=1
 export DEB_CXXFLAGS_MAINT_APPEND = -fvisibility=hidden -fvisibility-inlines-hidden
 
 %:
 	dh $@ --parallel --with kde --with pkgkde_symbolshelper
-
 
 override_dh_install:
 	dh_install --list-missing
