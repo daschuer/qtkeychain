@@ -1,9 +1,7 @@
 #!/usr/bin/make -f
 # -*- makefile -*-
-
 # Uncomment this to turn on verbose mode.
 #export DH_VERBOSE=1
-export QT_SELECT := qt4
 
 export DEB_BUILD_HARDENING=1
 export DEB_CXXFLAGS_MAINT_APPEND = -fvisibility=hidden -fvisibility-inlines-hidden
@@ -11,5 +9,22 @@ export DEB_CXXFLAGS_MAINT_APPEND = -fvisibility=hidden -fvisibility-inlines-hidd
 %:
 	dh $@ --parallel --with kde --with pkgkde_symbolshelper
 
+override_dh_auto_clean:
+	dh_auto_clean
+	rm -rf build-qt5
+
+override_dh_auto_configure:
+	dh_auto_configure -- -DBUILD_WITH_QT4=On
+	dh_auto_configure --builddirectory=build-qt5 --
+
+override_dh_auto_build:
+	dh_auto_build
+	dh_auto_build --builddirectory=build-qt5
+
+override_dh_auto_install:
+	dh_auto_install
+	dh_auto_install --builddirectory=build-qt5
+
 override_dh_install:
 	dh_install --list-missing
+
