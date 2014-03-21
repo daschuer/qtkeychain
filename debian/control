@@ -19,11 +19,12 @@ Architecture: any
 Multi-Arch: same
 Depends: ${misc:Depends}, ${shlibs:Depends}
 Pre-Depends: ${misc:Pre-Depends}
-Recommends: gnome-keyring | kwalletmanager
-Description: Qt API to store passwords and other secret data securely
- It uses KWallet (via D-Bus) if available.
- Support for the GNOME Keyring via freedesktop.org's Secret Storage
- D-Bus specification is planned but not yet implemented.
+Recommends: gnome-keyring | kde-runtime
+Description: Qt API to store passwords
+  It can use KWallet or GNOME Keyring, if one of them is available.
+  If none of them is available, qtkeychain will report an error or writes
+  with expicit request the password unencrypted at a file.
+
 
 Package: qtkeychain-dev
 Section: libdevel
@@ -31,8 +32,8 @@ Architecture: any
 Multi-Arch: same
 Depends: libqtkeychain0 (= ${binary:Version}), ${misc:Depends}
 Description: Development files for qtkeychain
- A Qt API to store passwords and other secret data securely
+ Qt API to store passwords
  .
- It uses KWallet (via D-Bus) if available.
- Support for the GNOME Keyring via freedesktop.org's Secret Storage
- D-Bus specification is planned but not yet implemented.
+ It can use KWallet or GNOME Keyring, if one of them is available.
+ If none of them is available, qtkeychain will report an error or writes
+ with expicit request the password unencrypted at a file.
