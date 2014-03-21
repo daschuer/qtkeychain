@@ -5,7 +5,6 @@ Uploaders: Sandro Knauß <bugs@sandroknauss.de>
 Build-Depends: cmake,
                debhelper (>= 8.0.0),
                hardening-wrapper,
-#               qttools5-dev-tools, qttools5-dev,   #for QT5 (#738196->we need to wait till 5.2.0 enters sid)
                libqt4-dev,
                pkg-kde-tools
 Standards-Version: 3.9.5
