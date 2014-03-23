@@ -20,10 +20,9 @@ Depends: ${misc:Depends}, ${shlibs:Depends}
 Pre-Depends: ${misc:Pre-Depends}
 Recommends: gnome-keyring | kde-runtime
 Description: Qt API to store passwords
-  It can use KWallet or GNOME Keyring, if one of them is available.
-  If none of them is available, qtkeychain will report an error or writes
-  with expicit request the password unencrypted at a file.
-
+ It can use KWallet or GNOME Keyring, if one of them is available.
+ If none of them is available, qtkeychain will report an error or writes
+ with explicit request the password unencrypted at a file.
 
 Package: qtkeychain-dev
 Section: libdevel
@@ -35,4 +34,4 @@ Description: Development files for qtkeychain
  .
  It can use KWallet or GNOME Keyring, if one of them is available.
  If none of them is available, qtkeychain will report an error or writes
- with expicit request the password unencrypted at a file.
+ with explicit request the password unencrypted at a file.
