@@ -1,4 +1,4 @@
-# SymbolsHelper-Confirmed: 0.3.0 amd64
+# SymbolsHelper-Confirmed: 0.3.0 amd64 i386
 libqt5keychain.so.0 libqt5keychain0 #MINVER#
  (optional=templinst)_Z10qdbus_castI10QByteArrayET_RK13QDBusArgumentPS1_@Base 0.3.0
  (optional=templinst)_Z10qdbus_castI10QByteArrayET_RK8QVariantPS1_@Base 0.3.0
@@ -101,7 +101,8 @@ libqt5keychain.so.0 libqt5keychain0 #MINVER#
  (optional=templinst)_ZN15QTypedArrayDataI8QPointerIN9QKeychain3JobEEE3endEPS3_@Base 0.3.0
  (optional=templinst)_ZN15QTypedArrayDataI8QPointerIN9QKeychain3JobEEE4dataEv@Base 0.3.0
  (optional=templinst)_ZN15QTypedArrayDataI8QPointerIN9QKeychain3JobEEE5beginEPS3_@Base 0.3.0
- (optional=templinst)_ZN15QTypedArrayDataI8QPointerIN9QKeychain3JobEEE8allocateEm6QFlagsIN10QArrayData16AllocationOptionEE@Base 0.3.0
+ (optional=templinst|arch=i386)_ZN15QTypedArrayDataI8QPointerIN9QKeychain3JobEEE8allocateEj6QFlagsIN10QArrayData16AllocationOptionEE@Base 0.3.0
+ (optional=templinst|arch=amd64)_ZN15QTypedArrayDataI8QPointerIN9QKeychain3JobEEE8allocateEm6QFlagsIN10QArrayData16AllocationOptionEE@Base 0.3.0
  (optional=templinst)_ZN15QTypedArrayDataIcE10deallocateEP10QArrayData@Base 0.3.0
  (optional=templinst)_ZN15QTypedArrayDataIcE10sharedNullEv@Base 0.3.0
  (optional=templinst)_ZN15QTypedArrayDataIcE4dataEv@Base 0.3.0
@@ -588,4 +589,5 @@ libqt5keychain.so.0 libqt5keychain0 #MINVER#
  (optional=templinst)_ZZN18QMetaTypeIdQObjectIP23QDBusPendingCallWatcherLb1EE14qt_metatype_idEvE11metatype_id@Base 0.3.0
  (optional=templinst)_ZZN18QMetaTypeIdQObjectIPN9QKeychain3JobELb1EE14qt_metatype_idEvE11metatype_id@Base 0.3.0
  _ZdlPvS_@Base 0.3.0
- _ZnwmPv@Base 0.3.0
+ (arch=i386)_ZnwjPv@Base 0.3.0
+ (arch=amd64)_ZnwmPv@Base 0.3.0
