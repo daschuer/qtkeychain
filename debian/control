@@ -5,9 +5,10 @@ Uploaders: Sandro Knauß <bugs@sandroknauss.de>
 Build-Depends: cmake,
                debhelper (>= 8.0.0),
                hardening-wrapper,
-               qttools5-dev-tools (>= 5.2.1), qttools5-dev (>= 5.2.1),
                libqt4-dev,
-               pkg-kde-tools
+               pkg-kde-tools,
+               qttools5-dev (>= 5.2.1),
+               qttools5-dev-tools (>= 5.2.1)
 Standards-Version: 3.9.5
 Section: libs
 Homepage: https://github.com/frankosterfeld/qtkeychain
