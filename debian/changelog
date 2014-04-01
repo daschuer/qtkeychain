@@ -1,3 +1,11 @@
+qtkeychain (0.3.0-2) unstable; urgency=medium
+
+  * Building lib for qt4 and qt5.
+  * Added packages libqt5keychain0 and qt5keychain-dev
+  * Added symbols for libqt5keychain0
+
+ -- Sandro Knauß <bugs@sandroknauss.de>  Tue, 01 Apr 2014 12:54:47 +0200
+
 qtkeychain (0.3.0-1) unstable; urgency=medium
 
   * New upstream release. (Closes: #735043)
