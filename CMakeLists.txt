@@ -3,7 +3,7 @@ project(qtkeychain)
 
 ###
 
-set(QTKEYCHAIN_VERSION 0.3.0)
+set(QTKEYCHAIN_VERSION 0.4.0)
 set(QTKEYCHAIN_SOVERSION 0)
 
 ###
@@ -81,6 +81,8 @@ list(APPEND qtkeychain_LIBRARIES ${QTCORE_LIBRARIES})
 set(qtkeychain_SOURCES
     keychain.cpp
 )
+
+ADD_DEFINITIONS( -Wall )
 
 if(WIN32)
     list(APPEND qtkeychain_SOURCES keychain_win.cpp)
