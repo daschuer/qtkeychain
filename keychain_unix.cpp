@@ -30,12 +30,78 @@ enum KeyringBackend {
     Backend_Kwallet
 };
 
+enum DesktopEnvironment {
+    DesktopEnv_Gnome,
+    DesktopEnv_Kde4,
+    DesktopEnv_Unity,
+    DesktopEnv_Xfce,
+    DesktopEnv_Other
+};
+
+// the following detection algorithm is derived from chromium,
+// licensed under BSD, see base/nix/xdg_util.cc
+
+static const char kKDE4SessionEnvVar[] = "KDE_SESSION_VERSION";
+
+static DesktopEnvironment detectDesktopEnvironment() {
+    QByteArray xdgCurrentDesktop = qgetenv("XDG_CURRENT_DESKTOP");
+    if ( xdgCurrentDesktop == "GNOME" ) {
+        return DesktopEnv_Gnome;
+    } else if ( xdgCurrentDesktop == "Unity" ) {
+            return DesktopEnv_Unity;
+    } else if ( xdgCurrentDesktop == "KDE" ) {
+        return DesktopEnv_Kde4;
+    }
+
+    QByteArray desktopSession = qgetenv("DESKTOP_SESSION");
+    if ( desktopSession == "gnome" ) {
+        return DesktopEnv_Gnome;
+    } else if ( desktopSession == "kde" ) {
+        if ( qgetenv(kKDE4SessionEnvVar).isEmpty() ) {
+            // most likely KDE3
+            return DesktopEnv_Other;
+        } else {
+            return DesktopEnv_Kde4;
+        }
+    } else if ( desktopSession == "kde4" ) {
+        return DesktopEnv_Kde4;
+    } else if ( desktopSession.contains("xfce") || desktopSession == "xubuntu" ) {
+        return DesktopEnv_Xfce;
+    }
+
+    if ( !qgetenv("GNOME_DESKTOP_SESSION_ID").isEmpty() ) {
+        return DesktopEnv_Gnome;
+    } else if ( !qgetenv("KDE_FULL_SESSION").isEmpty() ) {
+        if ( qgetenv(kKDE4SessionEnvVar).isEmpty() ) {
+            // most likely KDE3
+            return DesktopEnv_Other;
+        } else {
+            return DesktopEnv_Kde4;
+        }
+    }
+
+    return DesktopEnv_Other;
+}
+
 static KeyringBackend detectKeyringBackend()
 {
-    if ( !( qgetenv( "GNOME_KEYRING_CONTROL" ).isNull() && qgetenv("GNOME_KEYRING_SOCKET").isNull() ) && GnomeKeyring::isSupported() )
-        return Backend_GnomeKeyring;
-    else
+    switch (detectDesktopEnvironment()) {
+    case DesktopEnv_Kde4:
         return Backend_Kwallet;
+        break;
+    // fall through
+    case DesktopEnv_Gnome:
+    case DesktopEnv_Unity:
+    case DesktopEnv_Xfce:
+    case DesktopEnv_Other:
+    default:
+        if ( GnomeKeyring::isAvailable() ) {
+            return Backend_GnomeKeyring;
+        } else {
+            return Backend_Kwallet;
+        }
+    }
+
 }
 
 static KeyringBackend getKeyringBackend()
@@ -283,9 +349,9 @@ void WritePasswordJobPrivate::scheduledStart() {
         if ( QDBusConnection::sessionBus().isConnected() )
         {
             iface = new org::kde::KWallet( QLatin1String("org.kde.kwalletd"), QLatin1String("/modules/kwalletd"), QDBusConnection::sessionBus(), this );
-            const QDBusPendingReply<int> reply = iface->open( QLatin1String("kdewallet"), 0, q->service() );
+            const QDBusPendingReply<QString> reply = iface->networkWallet();
             QDBusPendingCallWatcher* watcher = new QDBusPendingCallWatcher( reply, this );
-            connect( watcher, SIGNAL(finished(QDBusPendingCallWatcher*)), this, SLOT(kwalletOpenFinished(QDBusPendingCallWatcher*)) );
+            connect( watcher, SIGNAL(finished(QDBusPendingCallWatcher*)), this, SLOT(kwalletWalletFound(QDBusPendingCallWatcher*)) );
         }
         else
         {
@@ -361,6 +427,15 @@ void WritePasswordJobPrivate::gnomeKeyring_cb( int result, WritePasswordJobPriva
         const QPair<Error, QString> errorResult = mapGnomeKeyringError( result );
         self->q->emitFinishedWithError( errorResult.first, errorResult.second );
     }
+}
+
+void WritePasswordJobPrivate::kwalletWalletFound(QDBusPendingCallWatcher *watcher)
+{
+    watcher->deleteLater();
+    const QDBusPendingReply<QString> reply = *watcher;
+    const QDBusPendingReply<int> pendingReply = iface->open( reply.value(), 0, q->service() );
+    QDBusPendingCallWatcher* pendingWatcher = new QDBusPendingCallWatcher( pendingReply, this );
+    connect( pendingWatcher, SIGNAL(finished(QDBusPendingCallWatcher*)), this, SLOT(kwalletOpenFinished(QDBusPendingCallWatcher*)) );
 }
 
 void WritePasswordJobPrivate::kwalletOpenFinished( QDBusPendingCallWatcher* watcher ) {
