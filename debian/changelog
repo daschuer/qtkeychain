@@ -1,3 +1,9 @@
+qtkeychain (0.4.0-1) UNRELEASED; urgency=medium
+
+  * New upstream release. (Closes: #755349)
+
+ -- Sandro Knauß <bugs@sandroknauss.de>  Wed, 03 Sep 2014 13:55:07 +0200
+
 qtkeychain (0.3.0-2) unstable; urgency=medium
 
   * Building lib for qt4 and qt5.
