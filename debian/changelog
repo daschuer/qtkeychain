@@ -1,8 +1,11 @@
-qtkeychain (0.4.0-1) UNRELEASED; urgency=medium
+qtkeychain (0.4.0-1) unstable; urgency=medium
 
   * New upstream release. (Closes: #755349)
+  * Replaced hardening-wrapper with dpkg-buildflags
+  * Bumped compat to 9 to have dpkg-buildflags available
+  * Removed private symbols from libs
 
- -- Sandro Knauß <bugs@sandroknauss.de>  Wed, 03 Sep 2014 13:55:07 +0200
+ -- Sandro Knauß <bugs@sandroknauss.de>  Thu, 04 Sep 2014 17:30:43 +0200
 
 qtkeychain (0.3.0-2) unstable; urgency=medium
 
