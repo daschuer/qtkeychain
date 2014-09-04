@@ -1,6 +1,7 @@
 qtkeychain (0.4.0-1) unstable; urgency=medium
 
-  * New upstream release. (Closes: #755349)
+  * New upstream release:
+    - Improved desktop environment detection at runtime (Closes: #755349)
   * Replaced hardening-wrapper with dpkg-buildflags
   * Bumped compat to 9 to have dpkg-buildflags available
   * Removed private symbols from libs
