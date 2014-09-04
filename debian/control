@@ -3,8 +3,7 @@ Priority: extra
 Maintainer: ownCloud for Debian maintainers <pkg-owncloud-maintainers@lists.alioth.debian.org>
 Uploaders: Sandro Knauß <bugs@sandroknauss.de>
 Build-Depends: cmake,
-               debhelper (>= 8.0.0),
-               hardening-wrapper,
+               debhelper (>= 9),
                libqt4-dev,
                pkg-kde-tools,
                qttools5-dev (>= 5.2.1),
