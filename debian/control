@@ -6,8 +6,8 @@ Build-Depends: cmake,
                debhelper (>= 9),
                libqt4-dev,
                pkg-kde-tools,
-               qttools5-dev (>= 5.2.1),
-               qttools5-dev-tools (>= 5.2.1)
+               qttools5-dev,
+               qttools5-dev-tools
 Standards-Version: 3.9.5
 Section: libs
 Homepage: https://github.com/frankosterfeld/qtkeychain
