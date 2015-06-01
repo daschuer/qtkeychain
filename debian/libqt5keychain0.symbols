@@ -1,7 +1,7 @@
 # SymbolsHelper-Confirmed: 0.4.0 amd64
 libqt5keychain.so.0 libqt5keychain0 #MINVER#
- _ZN10QDBusErrorD1Ev@Base 0.4.0
- _ZN10QDBusErrorD2Ev@Base 0.4.0
+ (optional=tempinst)_ZN10QDBusErrorD1Ev@Base 0.4.0
+ (optional=tempinst)_ZN10QDBusErrorD2Ev@Base 0.4.0
  _ZN9QKeychain15ReadPasswordJob11qt_metacallEN11QMetaObject4CallEiPPv@Base 0.3.0
  _ZN9QKeychain15ReadPasswordJob11qt_metacastEPKc@Base 0.3.0
  _ZN9QKeychain15ReadPasswordJob16staticMetaObjectE@Base 0.3.0
