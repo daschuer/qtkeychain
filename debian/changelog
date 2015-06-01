@@ -1,9 +1,11 @@
-qtkeychain (0.5.0-1) UNRELEASED; urgency=medium
+qtkeychain (0.5.0-1) unstable; urgency=medium
 
   * New upstream release
   * updating watch file
+  * Make qtkeychain buildable with gcc5 (Closes: 778089)
+  * Bump Standards-Version: No changes needed
 
- -- Frank Osterfeld <frank.osterfeld@kdab.com>  Mon, 01 Jun 2015 19:38:11 +0200
+ -- Sandro Knauß <bugs@sandroknauss.de>  Mon, 01 Jun 2015 20:02:08 +0200
 
 qtkeychain (0.4.0-1) unstable; urgency=medium
 
