@@ -3,7 +3,7 @@ project(qtkeychain)
 
 ###
 
-set(QTKEYCHAIN_VERSION 0.5.0)
+set(QTKEYCHAIN_VERSION 0.6.2)
 set(QTKEYCHAIN_SOVERSION 0)
 
 ###
@@ -13,6 +13,13 @@ include(GNUInstallDirs)
 
 option(BUILD_WITH_QT4 "Build qtkeychain with Qt4 no matter if Qt5 was found" OFF)
 
+if (WIN32)
+    option(USE_CREDENTIAL_STORE "Build with windows CredentialStore support" ON)
+
+    if (USE_CREDENTIAL_STORE)
+	add_definitions(-DUSE_CREDENTIAL_STORE=1)
+    endif()
+endif()
 
 if( NOT BUILD_WITH_QT4 )
     # try Qt5 first, and prefer that if found
@@ -127,9 +134,8 @@ if(NOT QT_TRANSLATIONS_DIR)
     # Extract the qmake executable location
     get_target_property(QT5_QMAKE_EXECUTABLE Qt5::qmake IMPORTED_LOCATION)
     # Ask Qt5 where to put the translations
-    EXEC_PROGRAM( ${QT5_QMAKE_EXECUTABLE}
-        ARGS -query QT_INSTALL_TRANSLATIONS
-        OUTPUT_VARIABLE qt_translations_dir )
+    execute_process( COMMAND ${QT5_QMAKE_EXECUTABLE} -query QT_INSTALL_TRANSLATIONS
+        OUTPUT_VARIABLE qt_translations_dir OUTPUT_STRIP_TRAILING_WHITESPACE )
     # make sure we have / and not \ as qmake gives on windows
     FILE(TO_CMAKE_PATH "${qt_translations_dir}" qt_translations_dir)
     SET(QT_TRANSLATIONS_DIR ${qt_translations_dir} CACHE PATH "The
@@ -174,9 +180,6 @@ target_link_libraries( testclient ${QTKEYCHAIN_TARGET_NAME})
 ###
 ### CMake config file
 ###
-
-export(TARGETS ${QTKEYCHAIN_TARGET_NAME} FILE "${PROJECT_BINARY_DIR}/Qt${QTKEYCHAIN_VERSION_INFIX}KeychainLibraryDepends.cmake")
-export(PACKAGE Qt${QTKEYCHAIN_VERSION_INFIX}Keychain)
 
 configure_file(QtKeychainBuildTreeSettings.cmake.in
   "${PROJECT_BINARY_DIR}/Qt${QTKEYCHAIN_VERSION_INFIX}KeychainBuildTreeSettings.cmake" @ONLY)
