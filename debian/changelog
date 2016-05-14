@@ -1,3 +1,9 @@
+qtkeychain (0.6.2-0) UNRELEASED; urgency=medium
+
+  * New upstream release
+
+ -- Sandro Knauß <bugs@sandroknauss.de>  Sat, 14 May 2016 10:30:34 +0200
+
 qtkeychain (0.5.0-1) unstable; urgency=medium
 
   * New upstream release
