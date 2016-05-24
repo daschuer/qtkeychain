@@ -14,7 +14,7 @@ Homepage: https://github.com/frankosterfeld/qtkeychain
 Vcs-Git: git://anonscm.debian.org/pkg-owncloud/qtkeychain.git
 Vcs-Browser: http://anonscm.debian.org/gitweb/?p=pkg-owncloud/qtkeychain.git
 
-Package: libqtkeychain0
+Package: libqtkeychain1
 Architecture: any
 Multi-Arch: same
 Depends: ${misc:Depends}, ${shlibs:Depends}
@@ -29,7 +29,7 @@ Package: qtkeychain-dev
 Section: libdevel
 Architecture: any
 Multi-Arch: same
-Depends: libqtkeychain0 (= ${binary:Version}), ${misc:Depends}
+Depends: libqtkeychain1 (= ${binary:Version}), ${misc:Depends}
 Description: Development files for qtkeychain
  Qt API to store passwords
  .
@@ -37,7 +37,7 @@ Description: Development files for qtkeychain
  If none of them is available, qtkeychain will report an error or writes
  with explicit request the password unencrypted at a file.
 
-Package: libqt5keychain0
+Package: libqt5keychain1
 Architecture: any
 Multi-Arch: same
 Depends: ${misc:Depends}, ${shlibs:Depends}
@@ -54,7 +54,7 @@ Package: qt5keychain-dev
 Section: libdevel
 Architecture: any
 Multi-Arch: same
-Depends: libqt5keychain0 (= ${binary:Version}), ${misc:Depends}
+Depends: libqt5keychain1 (= ${binary:Version}), ${misc:Depends}
 Description: Development files for qtkeychain (QT5 version)
  A Qt API to store passwords
  .
