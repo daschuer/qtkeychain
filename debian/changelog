@@ -1,7 +1,9 @@
-qtkeychain (0.7.0-0) UNRELEASED; urgency=medium
+qtkeychain (0.7.0-1) UNRELEASED; urgency=medium
 
   * New upstream release
   * Bump Standards-Version (no changes needed)
+  * Bump SONAME and packagename, because of ABI breakage.
+  * Securify uris to debian git.
 
  -- Sandro Knauß <bugs@sandroknauss.de>  Sat, 14 May 2016 10:30:34 +0200
 
