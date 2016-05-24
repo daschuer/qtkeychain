@@ -1,6 +1,7 @@
-qtkeychain (0.6.2-0) UNRELEASED; urgency=medium
+qtkeychain (0.7.0-0) UNRELEASED; urgency=medium
 
   * New upstream release
+  * Bump Standards-Version (no changes needed)
 
  -- Sandro Knauß <bugs@sandroknauss.de>  Sat, 14 May 2016 10:30:34 +0200
 
