@@ -15,7 +15,7 @@ qtkeychain (0.5.0-1) unstable; urgency=medium
   * Make buildable with GCC-5 (Closes: #778089)
   * Bumped Standards-Version: No changes needed
 
- -- Sandro Knauß <bugs@sandroknauss.de>  Mon, 01 Jun 2015 22:41:45 +0200
+ -- Sandro Knauß <hefee@debian.org>  Mon, 01 Jun 2015 22:41:45 +0200
 
 qtkeychain (0.4.0-1) unstable; urgency=medium
 
@@ -25,7 +25,7 @@ qtkeychain (0.4.0-1) unstable; urgency=medium
   * Bumped compat to 9 to have dpkg-buildflags available
   * Removed private symbols from libs
 
- -- Sandro Knauß <bugs@sandroknauss.de>  Thu, 04 Sep 2014 17:30:43 +0200
+ -- Sandro Knauß <hefee@debian.org>  Thu, 04 Sep 2014 17:30:43 +0200
 
 qtkeychain (0.3.0-2) unstable; urgency=medium
 
@@ -33,7 +33,7 @@ qtkeychain (0.3.0-2) unstable; urgency=medium
   * Added packages libqt5keychain0 and qt5keychain-dev
   * Added symbols for libqt5keychain0
 
- -- Sandro Knauß <bugs@sandroknauss.de>  Tue, 01 Apr 2014 12:54:47 +0200
+ -- Sandro Knauß <hefee@debian.org>  Tue, 01 Apr 2014 12:54:47 +0200
 
 qtkeychain (0.3.0-1) unstable; urgency=medium
 
@@ -43,7 +43,7 @@ qtkeychain (0.3.0-1) unstable; urgency=medium
   * Updated debian/copyright
   * Bumped Standards-Version
 
- -- Sandro Knauß <bugs@sandroknauss.de>  Thu, 20 Mar 2014 13:09:16 +0100
+ -- Sandro Knauß <hefee@debian.org>  Thu, 20 Mar 2014 13:09:16 +0100
 
 qtkeychain (0.1.0-2) unstable; urgency=low
 
@@ -51,10 +51,10 @@ qtkeychain (0.1.0-2) unstable; urgency=low
   * Added patch use_system_GNUInstallDirs.cmake
   * use githubredir.debian.net for watch file
 
- -- Sandro Knauß <bugs@sandroknauss.de>  Fri, 27 Sep 2013 14:19:13 +0200
+ -- Sandro Knauß <hefee@debian.org>  Fri, 27 Sep 2013 14:19:13 +0200
 
 qtkeychain (0.1.0-1) unstable; urgency=low
 
   * Initial release (Closes: #699687)
 
- -- Sandro Knauß <bugs@sandroknauss.de>  Mon, 13 May 2013 01:39:05 +0200
+ -- Sandro Knauß <hefee@debian.org>  Mon, 13 May 2013 01:39:05 +0200

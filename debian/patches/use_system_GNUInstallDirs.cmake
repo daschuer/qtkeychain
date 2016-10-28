@@ -1,6 +1,6 @@
 Description: FTBFS on !linux: libraries left in /usr/lib
  Remove cmake/Modules/GNUInstallDirs.cmake to use the shipped version from debian.
-Author: Sandro Knauß <bugs@sandroknauss.de>
+Author: Sandro Knauß <hefee@debian.org>
 Origin: debian
 Bug-Debian: http://bugs.debian.org/cgi-bin/bugreport.cgi?bug=710340
 Forwarded: https://github.com/frankosterfeld/qtkeychain/issues/20

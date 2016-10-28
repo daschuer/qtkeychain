@@ -1,7 +1,7 @@
 Source: qtkeychain
 Priority: extra
 Maintainer: ownCloud for Debian maintainers <pkg-owncloud-maintainers@lists.alioth.debian.org>
-Uploaders: Sandro Knauß <bugs@sandroknauss.de>
+Uploaders: Sandro Knauß <hefee@debian.org>
 Build-Depends: cmake,
                debhelper (>= 9),
                libqt4-dev,
