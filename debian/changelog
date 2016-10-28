@@ -1,3 +1,10 @@
+qtkeychain (0.7.0-2) unstable; urgency=medium
+
+  * Upload to unstalbe to start transition.
+  * Update my mail address to debian.org address
+
+ -- Sandro Knauß <hefee@debian.org>  Fri, 28 Oct 2016 13:29:23 +0200
+
 qtkeychain (0.7.0-1) experimental; urgency=medium
 
   * New upstream release
