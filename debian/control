@@ -20,6 +20,8 @@ Multi-Arch: same
 Depends: ${misc:Depends}, ${shlibs:Depends}
 Pre-Depends: ${misc:Pre-Depends}
 Recommends: gnome-keyring | kde-runtime
+Breaks: libqtkeychain0
+Replaces: libqtkeychain0
 Description: Qt API to store passwords
  It can use KWallet or GNOME Keyring, if one of them is available.
  If none of them is available, qtkeychain will report an error or writes
@@ -43,6 +45,8 @@ Multi-Arch: same
 Depends: ${misc:Depends}, ${shlibs:Depends}
 Pre-Depends: ${misc:Pre-Depends}
 Recommends: gnome-keyring | kwalletmanager
+Breaks: libqt5keychain0
+Replaces: libqt5keychain0
 Description: Qt API to store passwords (QT5 version)
  It can use KWallet or GNOME Keyring, if one of them is available.
  If none of them is available, qtkeychain will report an error or writes
