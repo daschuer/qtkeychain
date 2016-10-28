@@ -1,3 +1,10 @@
+qtkeychain (0.7.0-3) unstable; urgency=medium
+
+  * Added Breaks and Replaces for Qt4 and Qt5 version.
+    Thanks to Alf Gaida (Closes: #842416)
+
+ -- Sandro Knauß <hefee@debian.org>  Sat, 29 Oct 2016 00:37:41 +0200
+
 qtkeychain (0.7.0-2) unstable; urgency=medium
 
   * Upload to unstable to start transition.
