@@ -1,6 +1,7 @@
 qtkeychain (0.8.0-1) UNRELEASED; urgency=medium
 
   * new upstream release.
+  * Updated copyright information.
 
  -- Sandro Knauß <hefee@debian.org>  Sat, 10 Jun 2017 15:12:54 +0200
 
