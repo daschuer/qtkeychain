@@ -13,19 +13,19 @@ include /usr/share/dpkg/buildflags.mk
 
 override_dh_auto_clean:
 	dh_auto_clean
-	rm -rf build-qt5
+	rm -rf build-Qt4
 
 override_dh_auto_configure:
-	dh_auto_configure -- -DBUILD_WITH_QT4=On
-	dh_auto_configure --builddirectory=build-qt5 --
+	dh_auto_configure --
+	dh_auto_configure --builddirectory=build-Qt4  -- -DBUILD_WITH_QT4=ON
 
 override_dh_auto_build:
 	dh_auto_build
-	dh_auto_build --builddirectory=build-qt5
+	dh_auto_build --builddirectory=build-Qt4
 
 override_dh_auto_install:
 	dh_auto_install
-	dh_auto_install --builddirectory=build-qt5
+	dh_auto_install --builddirectory=build-Qt4
 
 override_dh_install:
 	dh_install --list-missing
