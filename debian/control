@@ -5,6 +5,8 @@ Uploaders: Sandro Knauß <hefee@debian.org>
 Build-Depends: cmake,
                debhelper (>= 9),
                libqt4-dev,
+               libsecret-1-dev,
+               pkg-config,
                pkg-kde-tools,
                qttools5-dev,
                qttools5-dev-tools
