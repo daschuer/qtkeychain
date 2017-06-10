@@ -1,0 +1,19 @@
+Description: Make it possible to build with Qt4
+ Without this patch no Qt4 libary is buit anymore
+Author: Sandro Knauß <hefee@debian.org>
+Origin: Debian
+Forwarded: https://github.com/frankosterfeld/qtkeychain/pull/102
+Last-Update: 2017-06-10
+---
+This patch header follows DEP-3: http://dep.debian.net/deps/dep3/
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -38,7 +38,7 @@ if( NOT BUILD_WITH_QT4 )
+     find_package(Qt5Core QUIET)
+ endif()
+ 
+-if (Qt5Core_FOUND)
++if (Qt5Core_FOUND AND NOT BUILD_WITH_QT4)
+   set(QTKEYCHAIN_VERSION_INFIX 5)
+ 
+   if(UNIX AND NOT APPLE AND NOT ANDROID)

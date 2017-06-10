@@ -2,7 +2,9 @@ qtkeychain (0.8.0-1) UNRELEASED; urgency=medium
 
   * new upstream release.
   * Updated copyright information.
-  * Add new build dependencies.
+  * Add new build dependencies (pkg-config and libsecret-1).
+  * Add patch: fix-qt4-build.patch:
+    - Make Qt4 builds successfull again.
 
  -- Sandro Knauß <hefee@debian.org>  Sat, 10 Jun 2017 15:12:54 +0200
 
