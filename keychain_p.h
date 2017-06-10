@@ -15,7 +15,7 @@
 #include <QSettings>
 #include <QQueue>
 
-#if defined(Q_OS_UNIX) && !defined(Q_OS_DARWIN)
+#if defined(Q_OS_UNIX) && !defined(Q_OS_DARWIN) && !defined(Q_OS_ANDROID)
 
 #include <QDBusPendingCallWatcher>
 
@@ -45,9 +45,11 @@ public:
     static QString modeToString(Mode m);
     static Mode stringToMode(const QString& s);
 
+    Job* const q;
     Mode mode;
+    QByteArray data;
 
-#if defined(Q_OS_UNIX) && !defined(Q_OS_DARWIN)
+#if defined(Q_OS_UNIX) && !defined(Q_OS_DARWIN) && !defined(Q_OS_ANDROID)
     org::kde::KWallet* iface;
     int walletHandle;
 
@@ -61,9 +63,9 @@ protected Q_SLOTS:
     virtual void kwalletFinished( QDBusPendingCallWatcher* watcher );
     virtual void kwalletOpenFinished( QDBusPendingCallWatcher* watcher );
 #else
-    void kwalletWalletFound(QDBusPendingCallWatcher *watcher) {}
-    virtual void kwalletFinished( QDBusPendingCallWatcher* watcher ) {}
-    virtual void kwalletOpenFinished( QDBusPendingCallWatcher* watcher ) {}
+    void kwalletWalletFound( QDBusPendingCallWatcher* ) {}
+    virtual void kwalletFinished( QDBusPendingCallWatcher* ) {}
+    virtual void kwalletOpenFinished( QDBusPendingCallWatcher*  ) {}
 #endif
 
 protected:
@@ -77,13 +79,12 @@ protected:
     bool insecureFallback;
     QPointer<QSettings> settings;
     QString key;
-    Job* const q;
-    QByteArray data;
 
 friend class Job;
 friend class JobExecutor;
 friend class ReadPasswordJob;
 friend class WritePasswordJob;
+friend class PlainTextStore;
 };
 
 class ReadPasswordJobPrivate : public JobPrivate {
@@ -92,7 +93,7 @@ public:
     explicit ReadPasswordJobPrivate( const QString &service_, ReadPasswordJob* qq );
     void scheduledStart();
 
-#if defined(Q_OS_UNIX) && !defined(Q_OS_DARWIN)
+#if defined(Q_OS_UNIX) && !defined(Q_OS_DARWIN) && !defined(Q_OS_ANDROID)
     void fallbackOnError(const QDBusError& err);
 
 private Q_SLOTS:
@@ -115,7 +116,7 @@ public:
     explicit WritePasswordJobPrivate( const QString &service_, WritePasswordJob* qq );
     void scheduledStart();
 
-#if defined(Q_OS_UNIX) && !defined(Q_OS_DARWIN)
+#if defined(Q_OS_UNIX) && !defined(Q_OS_DARWIN) && !defined(Q_OS_ANDROID)
     void fallbackOnError(const QDBusError& err);
 #endif
 
@@ -129,7 +130,7 @@ public:
 
     void scheduledStart();
 
-#if defined(Q_OS_UNIX) && !defined(Q_OS_DARWIN)
+#if defined(Q_OS_UNIX) && !defined(Q_OS_DARWIN) && !defined(Q_OS_ANDROID)
     void fallbackOnError(const QDBusError& err);
 #endif
 
