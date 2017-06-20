@@ -4,10 +4,13 @@ qtkeychain (0.8.0-1) UNRELEASED; urgency=medium
   * Updated copyright information.
   * Add new build dependencies (pkg-config and libsecret-1).
   * Add patch: fix-qt4-build.patch:
-    - Make Qt4 builds successfull again.
+    - Make Qt4 builds successful again.
   * Switch to Qt5 as default build.
+  * Bump compat level:
+    - remove parallel from rules
+  * Bump Standrds-Version (no changes needed)
 
- -- Sandro Knauß <hefee@debian.org>  Sat, 10 Jun 2017 15:12:54 +0200
+ -- Sandro Knauß <hefee@debian.org>  Wed, 21 Jun 2017 02:04:02 +0200
 
 qtkeychain (0.7.0-3) unstable; urgency=medium
 
