@@ -3,7 +3,7 @@ Priority: extra
 Maintainer: ownCloud for Debian maintainers <pkg-owncloud-maintainers@lists.alioth.debian.org>
 Uploaders: Sandro Knauß <hefee@debian.org>
 Build-Depends: cmake,
-               debhelper (>= 9),
+               debhelper (>= 10),
                libqt4-dev,
                libsecret-1-dev,
                pkg-config,
