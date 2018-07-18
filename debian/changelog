@@ -1,6 +1,6 @@
-qtkeychain (0.9.0-1) UNRELEASED; urgency=medium
+qtkeychain (0.9.0-1) unstable; urgency=medium
 
-  * new upstream release.
+  * new upstream release (Closes: #866308) (Closes: #900556).
   * Updated copyright information.
   * Add new build dependencies (pkg-config and libsecret-1).
   * Switch to Qt5 as default build.
@@ -16,7 +16,7 @@ qtkeychain (0.9.0-1) UNRELEASED; urgency=medium
   * Update Vsc links to salsa.
   * Update Standards-Version to 4.1.5 (no changes needed)
 
- -- Sandro Knauß <hefee@debian.org>  Wed, 21 Jun 2017 02:07:26 +0200
+ -- Sandro Knauß <hefee@debian.org>  Wed, 18 Jul 2018 17:35:08 +0200
 
 qtkeychain (0.7.0-3) unstable; urgency=medium
 
