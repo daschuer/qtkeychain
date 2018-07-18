@@ -14,6 +14,7 @@ qtkeychain (0.9.0-1) UNRELEASED; urgency=medium
   * Bump compat level to 11 (no changes needed).
   * Use Priority optional instead of extra.
   * Update Vsc links to salsa.
+  * Update Standards-Version to 4.1.5 (no changes needed)
 
  -- Sandro Knauß <hefee@debian.org>  Wed, 21 Jun 2017 02:07:26 +0200
 
