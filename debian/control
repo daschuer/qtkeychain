@@ -1,5 +1,5 @@
 Source: qtkeychain
-Priority: extra
+Priority: optional
 Maintainer: ownCloud for Debian maintainers <pkg-owncloud-maintainers@lists.alioth.debian.org>
 Uploaders: Sandro Knauß <hefee@debian.org>
 Build-Depends: cmake,
