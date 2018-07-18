@@ -7,6 +7,9 @@ qtkeychain (0.9.0-1) UNRELEASED; urgency=medium
   * Bump compat level:
     - remove parallel from rules
   * Bump Standrds-Version (no changes needed)
+  * Fix "Future Qt4 removal from Buster" (Closes: #875152)
+    - remove libqtkeychain1 and qtkeychain from package build.
+    - do not build Qt4 interface anymore.
 
  -- Sandro Knauß <hefee@debian.org>  Wed, 21 Jun 2017 02:07:26 +0200
 

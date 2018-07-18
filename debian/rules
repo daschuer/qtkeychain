@@ -11,22 +11,5 @@ include /usr/share/dpkg/buildflags.mk
 %:
 	dh $@ --with kde --with pkgkde_symbolshelper
 
-override_dh_auto_clean:
-	dh_auto_clean
-	rm -rf build-Qt4
-
-override_dh_auto_configure:
-	dh_auto_configure --
-	dh_auto_configure --builddirectory=build-Qt4  -- -DBUILD_WITH_QT4=ON
-
-override_dh_auto_build:
-	dh_auto_build
-	dh_auto_build --builddirectory=build-Qt4
-
-override_dh_auto_install:
-	dh_auto_install
-	dh_auto_install --builddirectory=build-Qt4
-
 override_dh_install:
 	dh_install --list-missing
-

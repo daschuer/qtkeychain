@@ -4,7 +4,6 @@ Maintainer: ownCloud for Debian maintainers <pkg-owncloud-maintainers@lists.alio
 Uploaders: Sandro Knauß <hefee@debian.org>
 Build-Depends: cmake,
                debhelper (>= 10),
-               libqt4-dev,
                libsecret-1-dev,
                pkg-config,
                pkg-kde-tools,
@@ -15,31 +14,6 @@ Section: libs
 Homepage: https://github.com/frankosterfeld/qtkeychain
 Vcs-Git: https://anonscm.debian.org/git/pkg-owncloud/qtkeychain.git
 Vcs-Browser: https://anonscm.debian.org/cgit/pkg-owncloud/qtkeychain.git
-
-Package: libqtkeychain1
-Architecture: any
-Multi-Arch: same
-Depends: ${misc:Depends}, ${shlibs:Depends}
-Pre-Depends: ${misc:Pre-Depends}
-Recommends: gnome-keyring | kde-runtime
-Breaks: libqtkeychain0
-Replaces: libqtkeychain0
-Description: Qt API to store passwords
- It can use KWallet or GNOME Keyring, if one of them is available.
- If none of them is available, qtkeychain will report an error or writes
- with explicit request the password unencrypted at a file.
-
-Package: qtkeychain-dev
-Section: libdevel
-Architecture: any
-Multi-Arch: same
-Depends: libqtkeychain1 (= ${binary:Version}), ${misc:Depends}
-Description: Development files for qtkeychain
- Qt API to store passwords
- .
- It can use KWallet or GNOME Keyring, if one of them is available.
- If none of them is available, qtkeychain will report an error or writes
- with explicit request the password unencrypted at a file.
 
 Package: libqt5keychain1
 Architecture: any
