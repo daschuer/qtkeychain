@@ -5,4 +5,3 @@ version=3
 
 opts=filenamemangle=s/.+\/v?(\d\S*)\.tar\.gz/qtkeychain-$1\.tar\.gz/ \
 https://github.com/frankosterfeld/qtkeychain/tags .*/archive/v(.*).tar.gz
-#https://github.com/frankosterfeld/qtkeychain/tags v(.*).tar.gz
