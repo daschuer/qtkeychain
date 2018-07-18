@@ -13,6 +13,7 @@ qtkeychain (0.9.0-1) UNRELEASED; urgency=medium
   * Use secure url link in copyright.
   * Bump compat level to 11 (no changes needed).
   * Use Priority optional instead of extra.
+  * Update Vsc links to salsa.
 
  -- Sandro Knauß <hefee@debian.org>  Wed, 21 Jun 2017 02:07:26 +0200
 
