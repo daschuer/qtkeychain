@@ -3,8 +3,6 @@ qtkeychain (0.9.0-1) UNRELEASED; urgency=medium
   * new upstream release.
   * Updated copyright information.
   * Add new build dependencies (pkg-config and libsecret-1).
-  * Add patch: fix-qt4-build.patch:
-    - Make Qt4 builds successful again.
   * Switch to Qt5 as default build.
   * Bump compat level:
     - remove parallel from rules

@@ -1,2 +1,1 @@
-fix-qt4-build.patch
 use_system_GNUInstallDirs.cmake
