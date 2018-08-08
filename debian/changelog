@@ -1,5 +1,10 @@
 qtkeychain (0.9.0-2) UNRELEASED; urgency=medium
 
+  * Fix "cmake script requires linking with secret-1 library" (Closes: #905659)
+    - Mark target_link_libraries as private, if they are not exposed in public
+      interface.
+    - Add patch fix-dependencies.patch.
+
  -- Sandro Knauß <hefee@debian.org>  Wed, 08 Aug 2018 15:01:21 +0200
 
 qtkeychain (0.9.0-1) unstable; urgency=medium
