@@ -11,5 +11,5 @@ include /usr/share/dpkg/buildflags.mk
 %:
 	dh $@ --with kde --with pkgkde_symbolshelper
 
-override_dh_install:
-	dh_install --list-missing
+override_dh_missing:
+	dh_missing --list-missing
