@@ -1,2 +1,3 @@
 use_system_GNUInstallDirs.cmake
 fix-dependencies.patch
+On-Unix-systems-shared-libraries-have-a-abi-version.patch
