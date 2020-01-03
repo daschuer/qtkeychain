@@ -9,7 +9,7 @@ Build-Depends: cmake,
                pkg-kde-tools,
                qttools5-dev,
                qttools5-dev-tools
-Standards-Version: 4.3.0
+Standards-Version: 4.4.1
 Section: libs
 Homepage: https://github.com/frankosterfeld/qtkeychain
 Vcs-Git: https://salsa.debian.org/owncloud-team/qtkeychain.git
