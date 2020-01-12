@@ -1,4 +1,4 @@
-qtkeychain (0.10.0-1) UNRELEASED; urgency=medium
+qtkeychain (0.10.0-1) unstable; urgency=medium
 
   [ Debian Janitor ]
   * Set upstream metadata fields: Bug-Database, Repository, Repository-Browse.
@@ -8,8 +8,10 @@ qtkeychain (0.10.0-1) UNRELEASED; urgency=medium
   * New upstream release.
   * Add salsa-ci.yml
   * update d/gbp.conf.
+  * Remove backported patch.
+  * Add Rules-Requires-Root: no.
 
- -- Sandro Knauß <hefee@debian.org>  Sun, 12 Jan 2020 11:56:29 +0100
+ -- Sandro Knauß <hefee@debian.org>  Sun, 12 Jan 2020 12:12:59 +0100
 
 qtkeychain (0.9.1-2) unstable; urgency=medium
 
