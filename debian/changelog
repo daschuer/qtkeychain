@@ -1,3 +1,9 @@
+qtkeychain (0.10.0-2) UNRELEASED; urgency=medium
+
+  * Update d/watch to work with current github page.
+
+ -- Sandro Knauß <hefee@debian.org>  Sun, 19 Sep 2021 23:10:32 +0200
+
 qtkeychain (0.10.0-1) unstable; urgency=medium
 
   [ Debian Janitor ]
