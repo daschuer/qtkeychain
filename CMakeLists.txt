@@ -1,29 +1,35 @@
-cmake_minimum_required(VERSION 2.8.11)
-project(qtkeychain)
+cmake_minimum_required(VERSION 3.3)
+
+set(QTKEYCHAIN_VERSION 0.12.0)
+set(QTKEYCHAIN_SOVERSION 1)
+
+project(qtkeychain VERSION ${QTKEYCHAIN_VERSION})
+
+# Enable C++11
+SET(CMAKE_CXX_STANDARD 11)
 
 include(FindPkgConfig)
-
-###
-
-set(QTKEYCHAIN_VERSION 0.10.0)
-set(QTKEYCHAIN_SOVERSION 1)
 
 ###
 
 set(CMAKE_MODULE_PATH "${CMAKE_MODULE_PATH}" "${PROJECT_SOURCE_DIR}/cmake/Modules")
 include(GNUInstallDirs)
 include(GenerateExportHeader)
-include(ECMPackageConfigHelpers)
+include(CMakePackageConfigHelpers)
 include(ECMSetupVersion)
 include(ECMGeneratePriFile)
 
-option(BUILD_WITH_QT4 "Build qtkeychain with Qt4 no matter if Qt5 was found" OFF)
+option(BUILD_WITH_QT6 "Build qtkeychain with Qt 6" OFF)
 option(BUILD_TEST_APPLICATION "Build test application" ON)
 option(BUILD_TRANSLATIONS "Build translations" ON)
 option(QTKEYCHAIN_STATIC "Build static library" OFF)
 
 if(CMAKE_SYSTEM_NAME STREQUAL Android)
     set(ANDROID 1)
+endif()
+
+if(CMAKE_SYSTEM_NAME STREQUAL Haiku)
+    set(HAIKU 1)
 endif()
 
 if (WIN32)
@@ -34,16 +40,26 @@ if (WIN32)
     endif()
 endif()
 
-if( NOT BUILD_WITH_QT4 )
-    # try Qt5 first, and prefer that if found
-    find_package(Qt5Core QUIET)
+if( NOT BUILD_WITH_QT6 )
+    find_package(Qt5 COMPONENTS Core REQUIRED)
 endif()
 
-if (Qt5Core_FOUND AND NOT BUILD_WITH_QT4)
+if (Qt5Core_FOUND AND NOT BUILD_WITH_QT6)
   set(QTKEYCHAIN_VERSION_INFIX 5)
 
-  if(UNIX AND NOT APPLE AND NOT ANDROID)
-    find_package(Qt5DBus REQUIRED)
+  if(ANDROID)
+    if(Qt5Core_VERSION VERSION_LESS 5.7)
+        find_package(Qt5 COMPONENTS Core REQUIRED Private)
+        include_directories(${Qt5Core_PRIVATE_INCLUDE_DIRS})
+    endif()
+
+    find_package(Qt5 COMPONENTS AndroidExtras REQUIRED)
+    include_directories(${Qt5AndroidExtras_INCLUDE_DIRS})
+    set(QTANDROIDEXTRAS_LIBRARIES ${Qt5AndroidExtras_LIBRARIES})
+  endif()
+
+  if(UNIX AND NOT APPLE AND NOT ANDROID AND NOT HAIKU)
+    find_package(Qt5 COMPONENTS DBus REQUIRED)
     include_directories(${Qt5DBus_INCLUDE_DIRS})
     set(QTDBUS_LIBRARIES ${Qt5DBus_LIBRARIES})
     macro(qt_add_dbus_interface)
@@ -52,7 +68,7 @@ if (Qt5Core_FOUND AND NOT BUILD_WITH_QT4)
   endif()
 
   if(BUILD_TRANSLATIONS)
-    find_package(Qt5LinguistTools REQUIRED)
+    find_package(Qt5 COMPONENTS LinguistTools REQUIRED)
     macro(qt_add_translation)
       qt5_add_translation(${ARGN})
     endmacro(qt_add_translation)
@@ -67,46 +83,40 @@ if (Qt5Core_FOUND AND NOT BUILD_WITH_QT4)
 
   set(QTCORE_LIBRARIES ${Qt5Core_LIBRARIES})
   include_directories(${Qt5Core_INCLUDE_DIRS})
-
-  if (NOT Qt5Core_VERSION VERSION_LESS "5.7.0")
-    if (CMAKE_COMPILER_IS_GNUCXX)
-      if ((NOT CMAKE_CXX_COMPILER_VERSION VERSION_LESS "4.7.0") AND (CMAKE_CXX_COMPILER_VERSION VERSION_LESS "6.1.0"))
-        set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
-      elseif(CMAKE_CXX_COMPILER_VERSION VERSION_LESS "4.7.0")
-        message(FATAL_ERROR "Can't build QtKeychain using g++-${CMAKE_CXX_COMPILER_VERSION} and Qt ${Qt5Core_VERSION}: compiler supporting C++11 is required")
-      endif()
-    elseif (CMAKE_CXX_COMPILER_ID MATCHES "Clang")
-      if (NOT ${CMAKE_CXX_COMPILER_VERSION} VERSION_LESS 3.3)
-        set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
-      else()
-        message(FATAL_ERROR "Can't build QtKeychain using clang++-${CMAKE_CXX_COMPILER_VERSION} and Qt ${Qt5Core_VERSION}: compiler supporting C++11 is required")
-      endif()
-    elseif ((CMAKE_CXX_COMPILER_ID MATCHES "MSVC") AND (MSVC_VERSION LESS 1700))
-      message(FATAL_ERROR "Can't build QtKeychain using VC++-${MSVC_VERSION} and Qt ${Qt5Core_VERSION}: compiler supporting C++11 is required")
-    endif()
-  endif()
 else()
-  set(QTKEYCHAIN_VERSION_INFIX "")
-  if(UNIX AND NOT APPLE)
-    find_package(Qt4 COMPONENTS QtCore QtDBus REQUIRED)
-    set(QTDBUS_LIBRARIES ${QT_QTDBUS_LIBRARY})
-    macro(qt_add_dbus_interface)
-      qt4_add_dbus_interface(${ARGN})
-    endmacro()
-  else()
-    find_package(Qt4 COMPONENTS QtCore REQUIRED)
+  find_package(Qt6 COMPONENTS Core REQUIRED)
+  set(QTKEYCHAIN_VERSION_INFIX 6)
+
+  if(ANDROID)
+    find_package(Qt6 COMPONENTS AndroidExtras REQUIRED)
+    include_directories(${Qt6AndroidExtras_INCLUDE_DIRS})
+    set(QTANDROIDEXTRAS_LIBRARIES ${Qt6AndroidExtras_LIBRARIES})
   endif()
-  include_directories(${QT_INCLUDES})
-  set(QTCORE_LIBRARIES ${QT_QTCORE_LIBRARY})
-  macro(qt_add_translation)
-    qt4_add_translation(${ARGN})
-  endmacro(qt_add_translation)
-  macro(qt_create_translation)
-    qt4_create_translation(${ARGN})
-  endmacro(qt_create_translation)
+
+  if(UNIX AND NOT APPLE AND NOT ANDROID AND NOT HAIKU)
+    find_package(Qt6 COMPONENTS DBus REQUIRED)
+    include_directories(${Qt6DBus_INCLUDE_DIRS})
+    set(QTDBUS_LIBRARIES ${Qt6DBus_LIBRARIES})
+    macro(qt_add_dbus_interface)
+      qt6_add_dbus_interface(${ARGN})
+    endmacro()
+  endif()
+
+  if(BUILD_TRANSLATIONS)
+    find_package(Qt6 COMPONENTS LinguistTools REQUIRED)
+    macro(qt_add_translation)
+      qt6_add_translation(${ARGN})
+    endmacro(qt_add_translation)
+    macro(qt_create_translation)
+      qt6_create_translation(${ARGN})
+    endmacro(qt_create_translation)
+  endif()
+
   macro(qt_wrap_cpp)
-    qt4_wrap_cpp(${ARGN})
+    qt6_wrap_cpp(${ARGN})
   endmacro()
+
+  set(QTCORE_LIBRARIES ${Qt6Core_LIBRARIES})
 endif()
 
 
@@ -119,7 +129,18 @@ set(qtkeychain_SOURCES
     keychain.h
 )
 
-add_definitions( -Wall )
+if(CMAKE_CXX_COMPILER_ID MATCHES "MSVC")
+    # CMake < 3.15 sneaks in /W# flags for us, so we need a replacement,
+    # or we'll get a warning (cf. CMP0092)
+    if (CMAKE_CXX_FLAGS MATCHES "/W[0-4]")
+        string(REGEX REPLACE "/W[0-4]" "/W4" CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}")
+    else()
+        set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /W4")
+    endif()
+else()
+    # MSVC's STL / Qt headers are not MSVC -Wall clean, so don't enable it there
+    add_definitions( -Wall )
+endif()
 
 if(WIN32)
     list(APPEND qtkeychain_SOURCES keychain_win.cpp)
@@ -135,19 +156,22 @@ endif()
 
 if(APPLE)
     if(IOS)
-        list(APPEND qtkeychain_SOURCES keychain_ios.cpp)
+        list(APPEND qtkeychain_SOURCES keychain_ios.mm)
     else()
         list(APPEND qtkeychain_SOURCES keychain_mac.cpp)
     endif()
 
-    find_library(COREFOUNDATION_LIBRARY CoreFoundation REQUIRED)
-    list(APPEND qtkeychain_LIBRARIES ${COREFOUNDATION_LIBRARY})
-
-    find_library(SECURITY_LIBRARY Security REQUIRED)
-    list(APPEND qtkeychain_LIBRARIES ${SECURITY_LIBRARY})
+    list(APPEND qtkeychain_LIBRARIES "-framework Foundation" "-framework Security")
 endif()
 
-if(UNIX AND NOT APPLE AND NOT ANDROID)
+if(HAIKU)
+    list(APPEND qtkeychain_SOURCES keychain_haiku.cpp)
+
+    find_library(BE_LIBRARY be REQUIRED)
+    list(APPEND qtkeychain_LIBRARIES ${BE_LIBRARY})
+endif()
+
+if(UNIX AND NOT APPLE AND NOT ANDROID AND NOT HAIKU)
     option(LIBSECRET_SUPPORT "Build with libsecret support" ON)
 
     if(LIBSECRET_SUPPORT)
@@ -157,19 +181,28 @@ if(UNIX AND NOT APPLE AND NOT ANDROID)
             add_definitions(-DHAVE_LIBSECRET=1)
         endif()
         INCLUDE_DIRECTORIES(${LIBSECRET_INCLUDE_DIRS})
-        list(APPEND qtkeychain_LIBRARIES ${LIBSECRET_LIBRARIES})
+        list(APPEND qtkeychain_LIBRARIES_PRIVATE ${LIBSECRET_LIBRARIES})
     endif()
 
+    add_definitions(-DKEYCHAIN_DBUS=1)
     list(APPEND qtkeychain_SOURCES keychain_unix.cpp gnomekeyring.cpp libsecret.cpp plaintextstore.cpp)
     qt_add_dbus_interface(qtkeychain_SOURCES ${CMAKE_CURRENT_SOURCE_DIR}/org.kde.KWallet.xml kwallet_interface KWalletInterface)
     list(APPEND qtkeychain_LIBRARIES ${QTDBUS_LIBRARIES} )
+endif()
+
+if(ANDROID)
+    list(APPEND qtkeychain_SOURCES keychain_android.cpp androidkeystore.cpp plaintextstore.cpp)
+    list(APPEND qtkeychain_LIBRARIES ${QTANDROIDEXTRAS_LIBRARIES} )
 endif()
 
 QT_WRAP_CPP(qtkeychain_MOC_OUTFILES keychain.h keychain_p.h gnomekeyring_p.h)
 
 set(qtkeychain_TR_FILES
       translations/qtkeychain_de.ts
+      translations/qtkeychain_fr.ts
       translations/qtkeychain_ro.ts
+      translations/qtkeychain_ru.ts
+      translations/qtkeychain_zh.ts
 )
 
 file(GLOB qtkeychain_TR_SOURCES *.cpp *.h *.ui)
@@ -179,21 +212,19 @@ if ( BUILD_TRANSLATIONS )
     add_custom_target(messages DEPENDS ${qtkeychain_MESSAGES})
     add_custom_target(translations DEPENDS ${qtkeychain_QM_FILES})
 
-    if(NOT QT_TRANSLATIONS_DIR)
-	# If this directory is missing, we are in a Qt5 environment.
-	# Extract the qmake executable location
-	get_target_property(QT5_QMAKE_EXECUTABLE Qt5::qmake IMPORTED_LOCATION)
-	# Ask Qt5 where to put the translations
-	execute_process( COMMAND ${QT5_QMAKE_EXECUTABLE} -query QT_INSTALL_TRANSLATIONS
-	    OUTPUT_VARIABLE qt_translations_dir OUTPUT_STRIP_TRAILING_WHITESPACE )
-	# make sure we have / and not \ as qmake gives on windows
-	file( TO_CMAKE_PATH "${qt_translations_dir}" qt_translations_dir)
-	set( QT_TRANSLATIONS_DIR ${qt_translations_dir} CACHE PATH
-	     "The location of the Qt translations" FORCE)
+    if(QTKEYCHAIN_VERSION_INFIX EQUAL 5 AND QT_TRANSLATIONS_DIR AND NOT QTKEYCHAIN_TRANSLATIONS_DIR)
+        # Back compatibility with pre-0.11 versions
+        message (WARNING "QT_TRANSLATIONS_DIR is deprecated, use QTKEYCHAIN_TRANSLATIONS_DIR instead")
+        set(QTKEYCHAIN_TRANSLATIONS_DIR ${QT_TRANSLATIONS_DIR}
+            CACHE PATH "The location of the QtKeychain translations" FORCE)
+    else()
+        set(QTKEYCHAIN_TRANSLATIONS_DIR
+            ${CMAKE_INSTALL_DATADIR}/qt${QTKEYCHAIN_VERSION_INFIX}keychain/translations
+            CACHE PATH "The location of the QtKeychain translations" )
     endif()
 
     install(FILES ${qtkeychain_QM_FILES}
-	    DESTINATION ${QT_TRANSLATIONS_DIR})
+	    DESTINATION ${QTKEYCHAIN_TRANSLATIONS_DIR})
 endif( BUILD_TRANSLATIONS )
 
 set(QTKEYCHAIN_TARGET_NAME qt${QTKEYCHAIN_VERSION_INFIX}keychain)
@@ -202,9 +233,15 @@ if(NOT QTKEYCHAIN_STATIC)
 else()
     add_library(${QTKEYCHAIN_TARGET_NAME} STATIC ${qtkeychain_SOURCES} ${qtkeychain_MOC_OUTFILES} ${qtkeychain_QM_FILES})
 endif()
+if(WIN32)
+    set_target_properties( ${QTKEYCHAIN_TARGET_NAME} PROPERTIES DEBUG_POSTFIX "d" )
+endif()
 
-target_link_libraries(${QTKEYCHAIN_TARGET_NAME} PUBLIC ${qtkeychain_LIBRARIES})
-target_include_directories(${QTKEYCHAIN_TARGET_NAME} PUBLIC $<INSTALL_INTERFACE:include/>)
+target_link_libraries(${QTKEYCHAIN_TARGET_NAME} PUBLIC ${qtkeychain_LIBRARIES} PRIVATE ${qtkeychain_LIBRARIES_PRIVATE})
+if(NOT INTERFACE_INCLUDE_SUFFIX)
+    set(INTERFACE_INCLUDE_SUFFIX include)
+endif()
+target_include_directories(${QTKEYCHAIN_TARGET_NAME} PUBLIC $<INSTALL_INTERFACE:${INTERFACE_INCLUDE_SUFFIX}/>)
 
 generate_export_header(${QTKEYCHAIN_TARGET_NAME}
   EXPORT_FILE_NAME qkeychain_export.h
@@ -240,7 +277,7 @@ endif()
 ### CMake config file
 ###
 
-ecm_configure_package_config_file("${CMAKE_CURRENT_SOURCE_DIR}/QtKeychainConfig.cmake.in"
+configure_package_config_file("${CMAKE_CURRENT_SOURCE_DIR}/QtKeychainConfig.cmake.in"
   "${CMAKE_CURRENT_BINARY_DIR}/Qt${QTKEYCHAIN_VERSION_INFIX}KeychainConfig.cmake"
   INSTALL_DESTINATION Qt${QTKEYCHAIN_VERSION_INFIX}Keychain)
 
@@ -248,7 +285,7 @@ ecm_setup_version("${QTKEYCHAIN_VERSION}" VARIABLE_PREFIX SNORE
   PACKAGE_VERSION_FILE "${CMAKE_CURRENT_BINARY_DIR}/Qt${QTKEYCHAIN_VERSION_INFIX}KeychainConfigVersion.cmake"
   SOVERSION ${QTKEYCHAIN_VERSION})
 
-if(UNIX AND NOT APPLE AND NOT ANDROID)
+if(UNIX AND NOT APPLE AND NOT ANDROID AND NOT HAIKU)
     set(PRI_EXTRA_DEPS "dbus")
 endif()
 ecm_generate_pri_file(BASE_NAME Qt${QTKEYCHAIN_VERSION_INFIX}Keychain

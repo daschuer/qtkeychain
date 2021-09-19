@@ -1,6 +1,24 @@
 ChangeLog
 =========
 
+version 0.12.0 (release 2020-12-16)
+
+  * Add Qt 6 support, drop Qt 4 support
+  * Require C++11
+  * Add Android support (Mathias Hasselmann)
+
+version 0.11.1 (release 2020-09-08)
+
+  * Build system fixes
+
+version 0.11.0 (release 2020-09-08)
+
+  * Important: Debug builds on Windows now get the "d" suffix
+  * Various build system fixes
+  * Add Haiku support (François Revol <revol@free.fr>)
+  * Translation: Russian (Alexander Gorishnyak <kefir500@gmail.com>)
+  * Translation: Update French (David Geiger <david.david@mageialinux-online.org>)
+
 version 0.10.0 (release 2019-12-17)
 
   * Detect XFCE desktop correctly. (Sandro Knauß <hefee@debian.org>)

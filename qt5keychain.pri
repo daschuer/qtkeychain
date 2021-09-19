@@ -18,7 +18,7 @@ HEADERS += \
 SOURCES += \
     $$QT5KEYCHAIN_PWD/keychain.cpp
 
-unix:!macx:!ios {
+unix:!android:!macx:!ios {
     # Remove the following LIBSECRET_SUPPORT line
     # to build without libsecret support.
     DEFINES += LIBSECRET_SUPPORT
@@ -52,6 +52,18 @@ unix:!macx:!ios {
         $$QT5KEYCHAIN_PWD/libsecret.cpp
 }
 
+android {
+    QT += androidextras
+
+    HEADERS += \
+        $$QT5KEYCHAIN_PWD/androidkeystore_p.h \
+        $$QT5KEYCHAIN_PWD/plaintextstore_p.h
+    SOURCES += \
+        $$QT5KEYCHAIN_PWD/androidkeystore.cpp \
+        $$QT5KEYCHAIN_PWD/keychain_android.cpp \
+        $$QT5KEYCHAIN_PWD/plaintextstore.cpp
+}
+
 win32 {
     # Remove the following USE_CREDENTIAL_STORE line
     # to use the CryptProtectData Windows API function
@@ -59,10 +71,10 @@ win32 {
     DEFINES += USE_CREDENTIAL_STORE
     contains(DEFINES, USE_CREDENTIAL_STORE) {
         !build_pass:message("Windows Credential Store support: on")
-        LIBS += -lAdvapi32
+        LIBS += -ladvapi32
     } else {
         !build_pass:message("Windows Credential Store support: off")
-        LIBS += -lCrypt32
+        LIBS += -lcrypt32
         HEADERS += $$QT5KEYCHAIN_PWD/plaintextstore_p.h
         SOURCES += $$QT5KEYCHAIN_PWD/plaintextstore.cpp
     }

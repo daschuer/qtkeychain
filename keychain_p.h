@@ -15,7 +15,7 @@
 #include <QSettings>
 #include <QQueue>
 
-#if defined(Q_OS_UNIX) && !defined(Q_OS_DARWIN) && !defined(Q_OS_ANDROID)
+#if defined(KEYCHAIN_DBUS)
 
 #include <QDBusPendingCallWatcher>
 
@@ -49,7 +49,7 @@ public:
     Mode mode;
     QByteArray data;
 
-#if defined(Q_OS_UNIX) && !defined(Q_OS_DARWIN) && !defined(Q_OS_ANDROID)
+#if defined(KEYCHAIN_DBUS)
     org::kde::KWallet* iface;
     int walletHandle;
 
@@ -91,9 +91,9 @@ class ReadPasswordJobPrivate : public JobPrivate {
     Q_OBJECT
 public:
     explicit ReadPasswordJobPrivate( const QString &service_, ReadPasswordJob* qq );
-    void scheduledStart();
+    void scheduledStart() override;
 
-#if defined(Q_OS_UNIX) && !defined(Q_OS_DARWIN) && !defined(Q_OS_ANDROID)
+#if defined(KEYCHAIN_DBUS)
     void fallbackOnError(const QDBusError& err);
 
 private Q_SLOTS:
@@ -114,9 +114,9 @@ class WritePasswordJobPrivate : public JobPrivate {
     Q_OBJECT
 public:
     explicit WritePasswordJobPrivate( const QString &service_, WritePasswordJob* qq );
-    void scheduledStart();
+    void scheduledStart() override;
 
-#if defined(Q_OS_UNIX) && !defined(Q_OS_DARWIN) && !defined(Q_OS_ANDROID)
+#if defined(KEYCHAIN_DBUS)
     void fallbackOnError(const QDBusError& err);
 #endif
 
@@ -128,9 +128,9 @@ class DeletePasswordJobPrivate : public JobPrivate {
 public:
     explicit DeletePasswordJobPrivate( const QString &service_, DeletePasswordJob* qq );
 
-    void scheduledStart();
+    void scheduledStart() override;
 
-#if defined(Q_OS_UNIX) && !defined(Q_OS_DARWIN) && !defined(Q_OS_ANDROID)
+#if defined(KEYCHAIN_DBUS)
     void fallbackOnError(const QDBusError& err);
 #endif
 
