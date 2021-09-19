@@ -3,7 +3,7 @@ Priority: optional
 Maintainer: ownCloud for Debian maintainers <pkg-owncloud-maintainers@lists.alioth.debian.org>
 Uploaders: Sandro Knauß <hefee@debian.org>
 Build-Depends: cmake,
-               debhelper-compat (= 12),
+               debhelper-compat (= 13),
                libsecret-1-dev,
                pkg-config,
                pkg-kde-tools,
