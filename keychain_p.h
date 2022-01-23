@@ -94,17 +94,17 @@ public:
     void scheduledStart() override;
 
 #if defined(KEYCHAIN_DBUS)
-    void fallbackOnError(const QDBusError& err);
+    void fallbackOnError(const QDBusError& err) override;
 
 private Q_SLOTS:
-    void kwalletOpenFinished( QDBusPendingCallWatcher* watcher );
+    void kwalletOpenFinished( QDBusPendingCallWatcher* watcher ) override;
     void kwalletEntryTypeFinished( QDBusPendingCallWatcher* watcher );
-    void kwalletFinished( QDBusPendingCallWatcher* watcher );
+    void kwalletFinished( QDBusPendingCallWatcher* watcher ) override;
 #else //moc's too dumb to respect above macros, so just define empty slot implementations
 private Q_SLOTS:
-    void kwalletOpenFinished( QDBusPendingCallWatcher* ) {}
+    void kwalletOpenFinished( QDBusPendingCallWatcher* ) override {}
     void kwalletEntryTypeFinished( QDBusPendingCallWatcher* ) {}
-    void kwalletFinished( QDBusPendingCallWatcher* ) {}
+    void kwalletFinished( QDBusPendingCallWatcher* ) override {}
 #endif
 
     friend class ReadPasswordJob;
@@ -117,7 +117,7 @@ public:
     void scheduledStart() override;
 
 #if defined(KEYCHAIN_DBUS)
-    void fallbackOnError(const QDBusError& err);
+    void fallbackOnError(const QDBusError& err) override;
 #endif
 
     friend class WritePasswordJob;
@@ -131,7 +131,7 @@ public:
     void scheduledStart() override;
 
 #if defined(KEYCHAIN_DBUS)
-    void fallbackOnError(const QDBusError& err);
+    void fallbackOnError(const QDBusError& err) override;
 #endif
 
 protected:
