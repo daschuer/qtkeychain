@@ -1,9 +1,9 @@
-cmake_minimum_required(VERSION 3.3)
+cmake_minimum_required(VERSION 3.16)
 
-set(QTKEYCHAIN_VERSION 0.12.0)
+set(QTKEYCHAIN_VERSION 0.13.0)
 set(QTKEYCHAIN_SOVERSION 1)
 
-project(qtkeychain VERSION ${QTKEYCHAIN_VERSION})
+project(qtkeychain VERSION ${QTKEYCHAIN_VERSION} LANGUAGES CXX)
 
 # Enable C++11
 SET(CMAKE_CXX_STANDARD 11)
@@ -20,7 +20,7 @@ include(ECMSetupVersion)
 include(ECMGeneratePriFile)
 
 option(BUILD_WITH_QT6 "Build qtkeychain with Qt 6" OFF)
-option(BUILD_TEST_APPLICATION "Build test application" ON)
+option(BUILD_TEST_APPLICATION "Build test application" OFF)
 option(BUILD_TRANSLATIONS "Build translations" ON)
 option(QTKEYCHAIN_STATIC "Build static library" OFF)
 
@@ -139,7 +139,7 @@ if(CMAKE_CXX_COMPILER_ID MATCHES "MSVC")
     endif()
 else()
     # MSVC's STL / Qt headers are not MSVC -Wall clean, so don't enable it there
-    add_definitions( -Wall )
+    add_definitions( -Wall -Werror=return-type )
 endif()
 
 if(WIN32)
@@ -155,12 +155,7 @@ if(WIN32)
 endif()
 
 if(APPLE)
-    if(IOS)
-        list(APPEND qtkeychain_SOURCES keychain_ios.mm)
-    else()
-        list(APPEND qtkeychain_SOURCES keychain_mac.cpp)
-    endif()
-
+    list(APPEND qtkeychain_SOURCES keychain_apple.mm)
     list(APPEND qtkeychain_LIBRARIES "-framework Foundation" "-framework Security")
 endif()
 
@@ -175,12 +170,10 @@ if(UNIX AND NOT APPLE AND NOT ANDROID AND NOT HAIKU)
     option(LIBSECRET_SUPPORT "Build with libsecret support" ON)
 
     if(LIBSECRET_SUPPORT)
-        pkg_check_modules(LIBSECRET libsecret-1)
-
-        if (LIBSECRET_FOUND)
-            add_definitions(-DHAVE_LIBSECRET=1)
-        endif()
+        pkg_check_modules(LIBSECRET REQUIRED libsecret-1)
+        add_definitions(-DHAVE_LIBSECRET=1)
         INCLUDE_DIRECTORIES(${LIBSECRET_INCLUDE_DIRS})
+        LINK_DIRECTORIES(${LIBSECRET_LIBRARY_DIRS})
         list(APPEND qtkeychain_LIBRARIES_PRIVATE ${LIBSECRET_LIBRARIES})
     endif()
 
@@ -192,7 +185,7 @@ endif()
 
 if(ANDROID)
     list(APPEND qtkeychain_SOURCES keychain_android.cpp androidkeystore.cpp plaintextstore.cpp)
-    list(APPEND qtkeychain_LIBRARIES ${QTANDROIDEXTRAS_LIBRARIES} )
+    list(APPEND qtkeychain_LIBRARIES_PRIVATE ${QTANDROIDEXTRAS_LIBRARIES} )
 endif()
 
 QT_WRAP_CPP(qtkeychain_MOC_OUTFILES keychain.h keychain_p.h gnomekeyring_p.h)
@@ -205,12 +198,24 @@ set(qtkeychain_TR_FILES
       translations/qtkeychain_zh.ts
 )
 
+set(QTKEYCHAIN_TARGET_NAME qt${QTKEYCHAIN_VERSION_INFIX}keychain)
+if(NOT QTKEYCHAIN_STATIC)
+    add_library(${QTKEYCHAIN_TARGET_NAME} SHARED ${qtkeychain_SOURCES} ${qtkeychain_MOC_OUTFILES} ${qtkeychain_QM_FILES})
+else()
+    add_library(${QTKEYCHAIN_TARGET_NAME} STATIC ${qtkeychain_SOURCES} ${qtkeychain_MOC_OUTFILES} ${qtkeychain_QM_FILES})
+endif()
+if(WIN32)
+    set_target_properties( ${QTKEYCHAIN_TARGET_NAME} PROPERTIES DEBUG_POSTFIX "d" )
+endif()
+
 file(GLOB qtkeychain_TR_SOURCES *.cpp *.h *.ui)
 if ( BUILD_TRANSLATIONS )
     qt_create_translation(qtkeychain_MESSAGES ${qtkeychain_TR_SOURCES} ${qtkeychain_TR_FILES})
     qt_add_translation(qtkeychain_QM_FILES ${qtkeychain_TR_FILES})
     add_custom_target(messages DEPENDS ${qtkeychain_MESSAGES})
-    add_custom_target(translations DEPENDS ${qtkeychain_QM_FILES})
+    add_custom_target(translations DEPENDS ${qtkeychain_QM_FILES} messages)
+    # https://github.com/frankosterfeld/qtkeychain/issues/185
+    add_dependencies(${QTKEYCHAIN_TARGET_NAME} translations)
 
     if(QTKEYCHAIN_VERSION_INFIX EQUAL 5 AND QT_TRANSLATIONS_DIR AND NOT QTKEYCHAIN_TRANSLATIONS_DIR)
         # Back compatibility with pre-0.11 versions
@@ -223,19 +228,8 @@ if ( BUILD_TRANSLATIONS )
             CACHE PATH "The location of the QtKeychain translations" )
     endif()
 
-    install(FILES ${qtkeychain_QM_FILES}
-	    DESTINATION ${QTKEYCHAIN_TRANSLATIONS_DIR})
+    install(FILES ${qtkeychain_QM_FILES} DESTINATION ${QTKEYCHAIN_TRANSLATIONS_DIR})
 endif( BUILD_TRANSLATIONS )
-
-set(QTKEYCHAIN_TARGET_NAME qt${QTKEYCHAIN_VERSION_INFIX}keychain)
-if(NOT QTKEYCHAIN_STATIC)
-    add_library(${QTKEYCHAIN_TARGET_NAME} SHARED ${qtkeychain_SOURCES} ${qtkeychain_MOC_OUTFILES} ${qtkeychain_QM_FILES})
-else()
-    add_library(${QTKEYCHAIN_TARGET_NAME} STATIC ${qtkeychain_SOURCES} ${qtkeychain_MOC_OUTFILES} ${qtkeychain_QM_FILES})
-endif()
-if(WIN32)
-    set_target_properties( ${QTKEYCHAIN_TARGET_NAME} PROPERTIES DEBUG_POSTFIX "d" )
-endif()
 
 target_link_libraries(${QTKEYCHAIN_TARGET_NAME} PUBLIC ${qtkeychain_LIBRARIES} PRIVATE ${qtkeychain_LIBRARIES_PRIVATE})
 if(NOT INTERFACE_INCLUDE_SUFFIX)
@@ -251,10 +245,14 @@ generate_export_header(${QTKEYCHAIN_TARGET_NAME}
 set_target_properties(${QTKEYCHAIN_TARGET_NAME} PROPERTIES
     VERSION ${QTKEYCHAIN_VERSION}
     SOVERSION ${QTKEYCHAIN_SOVERSION}
-    MACOSX_RPATH 1
-    INSTALL_NAME_DIR "${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_LIBDIR}"
     INSTALL_RPATH_USE_LINK_PATH TRUE
 )
+
+if (NOT APPLE)
+	set_target_properties(${QTKEYCHAIN_TARGET_NAME} PROPERTIES
+		INSTALL_NAME_DIR "${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_LIBDIR}"
+		)
+endif()
 
 install(FILES keychain.h ${CMAKE_CURRENT_BINARY_DIR}/qkeychain_export.h
         DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/qt${QTKEYCHAIN_VERSION_INFIX}keychain/
