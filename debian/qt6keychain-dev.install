@@ -1,0 +1,4 @@
+usr/include/qt6keychain
+usr/lib/*/cmake/Qt6Keychain/*.cmake
+usr/lib/*/libqt6keychain.so
+

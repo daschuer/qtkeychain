@@ -1,22 +1,21 @@
 Source: qtkeychain
 Priority: optional
-Maintainer: ownCloud for Debian maintainers <pkg-owncloud-maintainers@lists.alioth.debian.org>
-Uploaders: Sandro Knauß <hefee@debian.org>
+Maintainer: Daniel Schürmann <daschuer@mixxx.org>
 Build-Depends: cmake,
-               debhelper-compat (= 13),
+               debhelper-compat (= 12),
                libsecret-1-dev,
                pkg-config,
                pkg-kde-tools,
-               qttools5-dev,
-               qttools5-dev-tools
+               qt6-tools-dev,
+               qt6-tools-dev-tools
 Rules-Requires-Root: no
-Standards-Version: 4.6.0
+Standards-Version: 4.5.0
 Section: libs
 Homepage: https://github.com/frankosterfeld/qtkeychain
 Vcs-Git: https://salsa.debian.org/owncloud-team/qtkeychain.git
 Vcs-Browser: https://salsa.debian.org/owncloud-team/qtkeychain
 
-Package: libqt5keychain1
+Package: libqt6keychain1
 Architecture: any
 Multi-Arch: same
 Depends: ${misc:Depends}, ${shlibs:Depends}
@@ -29,13 +28,13 @@ Description: Qt API to store passwords (QT5 version)
  If none of them is available, qtkeychain will report an error or writes
  with explicit request the password unencrypted at a file.
  .
- This is the Version built for QT5
+ This is the Version built for QT6
 
-Package: qt5keychain-dev
+Package: qt6keychain-dev
 Section: libdevel
 Architecture: any
 Multi-Arch: same
-Depends: libqt5keychain1 (= ${binary:Version}), ${misc:Depends}
+Depends: libqt6keychain1 (= ${binary:Version}), ${misc:Depends}
 Description: Development files for qtkeychain (QT5 version)
  A Qt API to store passwords
  .
@@ -43,4 +42,4 @@ Description: Development files for qtkeychain (QT5 version)
  If none of them is available, qtkeychain will report an error or writes
  with explicit request the password unencrypted at a file.
  .
- This is the Version built for QT5
+ This is the Version built for QT6
